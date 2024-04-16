@@ -11,6 +11,8 @@ class LoginPage extends GetView<AuthenticationController> {
   LoginPage({super.key});
 
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController emailcontroller = TextEditingController();
+  final TextEditingController passwordcontroller = TextEditingController();
   final LoginController getxcontroller =
       Get.put<LoginController>(LoginController());
   @override
@@ -18,6 +20,7 @@ class LoginPage extends GetView<AuthenticationController> {
     return GetBuilder<AuthenticationController>(
       builder: (controller) {
         return Scaffold(
+
           resizeToAvoidBottomInset: false,
           extendBody: true,
           extendBodyBehindAppBar: true,
@@ -61,7 +64,7 @@ class LoginPage extends GetView<AuthenticationController> {
                     child: Column(
                       children: [
                         ReusableTextFormField(
-                          controller: controller.loginEmailController,
+                          controller: emailcontroller,
                           hintText: 'Email',
                           icon: Icons.email_outlined,
                           keyboardType: TextInputType.emailAddress,
@@ -79,7 +82,7 @@ class LoginPage extends GetView<AuthenticationController> {
 
                         // text field password
                         ReusableTextFormField(
-                          controller: controller.loginPasswordController,
+                          controller: passwordcontroller,
                           hintText: 'Password',
                           icon: Icons.password_outlined,
                           keyboardType: TextInputType.text,
@@ -101,21 +104,23 @@ class LoginPage extends GetView<AuthenticationController> {
                   MaterialButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        getxcontroller.isprofileloading(true);
-                        await getxcontroller.login();
-                        getxcontroller.isprofileloading(false);
+                        getxcontroller.isProfileLoading(true);
+                        await getxcontroller.login(
+                            emailcontroller.text.toString(),
+                            passwordcontroller.text.toString());
+                        getxcontroller.isProfileLoading(false);
                       }
                     },
                     height: 50,
-                    minWidth: 300,
+                    minWidth: MediaQuery.of(context).size.width * 0.89,
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    color: Colors.black,
+                    color: Colors.purple[600],
                     child: Obx(() {
-                      return getxcontroller.isprofileloading.value
+                      return getxcontroller.isProfileLoading.value
                           ? const CircularProgressIndicator(
                               strokeWidth: 3, color: Colors.white)
                           : const Text(

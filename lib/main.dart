@@ -4,10 +4,13 @@ import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/bindings/controllers_bindings.dart';
 import 'package:neuro_care_hub_app/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

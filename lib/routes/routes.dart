@@ -51,7 +51,7 @@ class AppRoutes {
     ),
     GetPage(
       name: AD,
-      page: () => const AlzheimerDetectionPage(),
+      page: () => AlzheimerDetectionPage(),
     ),
   ];
 }

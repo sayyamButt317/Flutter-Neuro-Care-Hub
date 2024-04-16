@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:neuro_care_hub_app/pages/login_page.dart';
 
+import 'onboarding_page.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -26,7 +28,7 @@ class _SplashPageState extends State<SplashPage>
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => LoginPage(),
+            builder: (context) => const OnBoarding(),
           ),
         );
       },

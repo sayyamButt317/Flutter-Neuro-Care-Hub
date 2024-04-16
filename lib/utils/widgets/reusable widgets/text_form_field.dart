@@ -8,20 +8,22 @@ class ReusableTextFormField extends StatelessWidget {
   const ReusableTextFormField({
     super.key,
     required this.controller,
-    required this.hintText,
+    this.hintText,
     required this.icon,
     required this.keyboardType,
     required this.obscureText,
     this.maxLines = 1,
-    required this.onvalidation,
+    required this.onvalidation, this.text, this.readOnly,
   });
 
   final TextEditingController controller;
-  final String hintText;
+  final String? hintText;
   final IconData? icon;
   final TextInputType keyboardType;
   final bool obscureText;
   final int maxLines;
+  final String? text;
+  final bool? readOnly;
   final FormFieldValidator onvalidation;
 
   @override
@@ -31,6 +33,7 @@ class ReusableTextFormField extends StatelessWidget {
         fontWeight: FontWeight.w500,
         fontSize: 13.0.sp,
       ),
+      readOnly: readOnly ?? false,
       controller: controller,
       validator: onvalidation,
       maxLines: maxLines,
@@ -50,6 +53,7 @@ class ReusableTextFormField extends StatelessWidget {
         hintStyle: TextStyles.boldDarkSmallTextStyle().copyWith(
           fontWeight: FontWeight.w500,
           fontSize: 13.0.sp,
+          color: Colors.grey,
         ),
         prefixIcon: icon != null ? Icon(icon) : null,
         fillColor: Colors.white,

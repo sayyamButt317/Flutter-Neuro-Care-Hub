@@ -36,7 +36,7 @@ class SwitchAuthenticationPageRow extends StatelessWidget {
             secondText,
             style: TextStyles.boldDarkSmallTextStyle().copyWith(
               fontSize: 12.0.sp,
-              color: const Color(0xffE2F0FA),
+              color: Colors.deepPurple,
             ),
           ),
         ),

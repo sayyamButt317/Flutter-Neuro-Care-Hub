@@ -11,7 +11,9 @@ import '../utils/widgets/reusable widgets/text_form_field.dart';
 
 class SignUpPage extends GetView<AuthenticationController> {
   SignUpPage({super.key});
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController emailcontroller = TextEditingController();
+  final TextEditingController passwordcontroller = TextEditingController();
   final SignupController getxcontroller =
       Get.put<SignupController>(SignupController());
   @override
@@ -52,60 +54,57 @@ class SignUpPage extends GetView<AuthenticationController> {
               SizedBox(
                 height: 10.0.hp,
               ),
-
-              // text field name
-              ReusableTextFormField(
-                controller: controller.signupNameController,
-                hintText: 'Name',
-                icon: Icons.person_outline,
-                keyboardType: TextInputType.text,
-                obscureText: false,
-                onvalidation: (value) =>
-                    value!.isEmpty ? "Enter your name" : null,
-              ),
-
               SizedBox(
                 height: 2.0.hp,
               ),
 
-              // text field email
-              ReusableTextFormField(
-                controller: controller.signupEmailController,
-                hintText: 'Email',
-                icon: Icons.email_outlined,
-                keyboardType: TextInputType.emailAddress,
-                obscureText: false,
-                onvalidation: (value) =>
-                    value!.isEmpty ? "Enter your Email" : null,
-              ),
+              // Form
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    // text field email
+                    ReusableTextFormField(
+                      controller: emailcontroller,
+                      hintText: 'Email',
+                      icon: Icons.email_outlined,
+                      keyboardType: TextInputType.emailAddress,
+                      obscureText: false,
+                      onvalidation: (value) =>
+                          value!.isEmpty ? "Enter your Email" : null,
+                    ),
 
-              SizedBox(
-                height: 2.0.hp,
-              ),
+                    SizedBox(
+                      height: 2.0.hp,
+                    ),
 
-              // text field password
-              ReusableTextFormField(
-                controller: controller.signupPasswordController,
-                hintText: 'Password',
-                icon: Icons.password_outlined,
-                keyboardType: TextInputType.text,
-                obscureText: true,
-                onvalidation: (value) =>
-                    value!.isEmpty ? "Enter your Password" : null,
+                    // text field password
+                    ReusableTextFormField(
+                      controller: passwordcontroller,
+                      hintText: 'Password',
+                      icon: Icons.password_outlined,
+                      keyboardType: TextInputType.text,
+                      obscureText: true,
+                      onvalidation: (value) =>
+                          value!.isEmpty ? "Enter your Password" : null,
+                    ),
+                  ],
+                ),
               ),
 
               SizedBox(
                 height: 5.0.hp,
               ),
 
+              // Sign-up button
               MaterialButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    getxcontroller.signUp();
+                    getxcontroller.signup(emailcontroller.text.toString(),passwordcontroller.text.toString());
                   }
                 },
                 height: 50,
-                minWidth: 300,
+                minWidth: MediaQuery.of(context).size.width * 0.89,
                 padding: const EdgeInsets.symmetric(
                   vertical: 10,
                   horizontal: 50,
@@ -113,9 +112,9 @@ class SignUpPage extends GetView<AuthenticationController> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                color: Colors.black,
+                color: Colors.purple[600],
                 child: Obx(() {
-                  return getxcontroller.isprofileloading.value
+                  return getxcontroller.loading.value
                       ? const CircularProgressIndicator(
                           strokeWidth: 3,
                           color: Colors.white,
@@ -133,6 +132,7 @@ class SignUpPage extends GetView<AuthenticationController> {
                 height: 5.0.hp,
               ),
 
+              // Switch to login page
               SwitchAuthenticationPageRow(
                 firstText: "Already Have An Account?",
                 secondText: "Login",

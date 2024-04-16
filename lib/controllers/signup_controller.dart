@@ -2,34 +2,50 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../routes/routes.dart';
+
 class SignupController extends GetxController {
-  final _email = TextEditingController();
-  final _password = TextEditingController();
+  var loading = false.obs;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  var isprofileloading = false.obs;
-  void setIsProfileLoading(bool isLoading) {
-    isprofileloading.value = isLoading;
-  }
-
-  void signUp() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    await auth
-        .createUserWithEmailAndPassword(
-            email: _email.text.toString(), password: _password.text.toString())
-        .then((value) {
-      isprofileloading(false);
-    }).onError((error, stackTrace) {
-      Get.snackbar(
-        'Error',
-        error.toString(),
-        backgroundColor: Colors.transparent,
-        snackPosition: SnackPosition.BOTTOM,
-        margin: const EdgeInsets.all(16),
-        colorText: Colors.red,
-        borderWidth: 1,
-        borderColor: Colors.red,
+  void signup(String email, String password) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
       );
-      isprofileloading(false);
-    });
+      // Show success snackbar for 2 seconds
+      Get.snackbar(
+        "Success",
+        "Account Created Successfully",
+        snackPosition: SnackPosition.BOTTOM,
+        duration: const Duration(seconds: 2),
+        snackStyle: SnackStyle.FLOATING,
+        backgroundColor: Colors.green,
+        colorText: Colors.lightGreen,
+        titleText: const Text(
+          "Success",
+          style: TextStyle(color: Colors.lightGreen), // Custom title color
+        ),
+      );
+      // Delay navigation to login screen by 2 seconds
+      await Future.delayed(const Duration(seconds: 3));
+      // Navigate to login screen
+      Get.offAllNamed(AppRoutes.LOGIN);
+    } catch (error) {
+      // Show error snackbar
+      Get.snackbar(
+        "Error",
+        "Failed to Create Account: $error",
+        snackPosition: SnackPosition.BOTTOM,
+        snackStyle: SnackStyle.FLOATING,
+        colorText:Colors.red,
+        titleText: const Text(
+          "Error",
+          style: TextStyle(color: Colors.red), // Custom title color
+        ),
+
+      );
+    }
   }
 }

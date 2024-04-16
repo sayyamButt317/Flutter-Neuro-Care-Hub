@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 
 class AlertDialogs {
-  static messageAlertDialog(IconData icon, String message) {
+  static messageAlertDialog(IconData icon, String message,) {
     Get.dialog(
       AlertDialog(
         backgroundColor: const Color(0xffb0a1d2),
@@ -33,6 +33,7 @@ class AlertDialogs {
       ),
     );
   }
+
 
   static resultAlertDialog(IconData icon, String message) {
     Get.dialog(
