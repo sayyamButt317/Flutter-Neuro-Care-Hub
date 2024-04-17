@@ -6,15 +6,17 @@ import '../../styles/text_styles.dart';
 
 class ReusableTextFormField extends StatelessWidget {
   const ReusableTextFormField({
-    super.key,
+    Key? key,
     required this.controller,
     this.hintText,
     required this.icon,
     required this.keyboardType,
     required this.obscureText,
     this.maxLines = 1,
-    required this.onvalidation, this.text, this.readOnly,
-  });
+    required this.onvalidation,
+    this.text,
+    this.readOnly,
+  }) : super(key: key);
 
   final TextEditingController controller;
   final String? hintText;
@@ -24,7 +26,7 @@ class ReusableTextFormField extends StatelessWidget {
   final int maxLines;
   final String? text;
   final bool? readOnly;
-  final FormFieldValidator onvalidation;
+  final FormFieldValidator<String>? onvalidation;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +45,7 @@ class ReusableTextFormField extends StatelessWidget {
       cursorErrorColor: Colors.transparent,
       keyboardType: keyboardType,
       decoration: InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         alignLabelWithHint: true,
         enabled: true,
         focusColor: Colors.transparent,
@@ -61,11 +62,13 @@ class ReusableTextFormField extends StatelessWidget {
         border: TextFieldBorderStyles.border,
         disabledBorder: TextFieldBorderStyles.disableBorder,
         errorBorder: TextFieldBorderStyles.errorBorder,
-        enabledBorder: TextFieldBorderStyles.enabledBorder,
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.black), // Add default black border color here
+          borderRadius: BorderRadius.circular(10.0), // Adjust border radius as needed
+        ),
         focusedBorder: TextFieldBorderStyles.focusedBorder,
         focusedErrorBorder: TextFieldBorderStyles.focusedErrorBorder,
-        errorStyle:
-            TextStyles.boldDarkMediumTextStyle().copyWith(color: Colors.red),
+        errorStyle: TextStyles.boldDarkMediumTextStyle().copyWith(color: Colors.red),
         errorMaxLines: 1,
       ),
     );

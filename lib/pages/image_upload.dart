@@ -3,14 +3,11 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:neuro_care_hub_app/controllers/brain_tumor_controller.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
-import 'package:neuro_care_hub_app/utils/methods/alert_dialog.dart';
 import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_button.dart';
-import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/text_form_field.dart';
 
 class ImageUploadPage extends GetView<TumorController> {
   ImageUploadPage({super.key});
 
-  final _formKey = GlobalKey<FormState>();
 
   final TumorController getxcontroller =
   Get.put<TumorController>(TumorController());

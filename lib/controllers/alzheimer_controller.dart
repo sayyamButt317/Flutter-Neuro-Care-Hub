@@ -5,5 +5,6 @@ class AlzheimerController extends GetxController {
   final TextEditingController namecontroller = TextEditingController();
   final TextEditingController agecontroller = TextEditingController();
   final TextEditingController gendercontroller = TextEditingController();
+  final TextEditingController diseasecontroller = TextEditingController();
 
 }

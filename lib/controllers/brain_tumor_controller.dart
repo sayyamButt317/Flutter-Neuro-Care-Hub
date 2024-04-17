@@ -12,6 +12,7 @@ class TumorController extends GetxController {
   final TextEditingController namecontroller = TextEditingController();
   final TextEditingController agecontroller = TextEditingController();
   final TextEditingController gendercontroller = TextEditingController();
+  final TextEditingController diseasecontroller = TextEditingController();
 
   var isprofileloading = false.obs;
   void setIsProfileLoading(bool isLoading) {
@@ -58,19 +59,14 @@ class TumorController extends GetxController {
 
   Future<void> storeUserInfo() async {
     try {
-      String imageurl = '';
-
-      if (selectedImage != null) {
-        imageurl = await uploadImage(selectedImage!);
-      }
-
       final uid = FirebaseAuth.instance.currentUser!.uid;
-      // Update user data with name and phone
+    
       await FirebaseFirestore.instance.collection('patient_info').doc(uid).set(
         {
           'name': namecontroller.text,
           'age': agecontroller.text,
-          'image': imageurl,
+          'gender': gendercontroller.text,
+          'disease':diseasecontroller.text,
         },
       );
     } catch (error) {

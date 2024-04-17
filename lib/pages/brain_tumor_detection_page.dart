@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:neuro_care_hub_app/controllers/brain_tumor_controller.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
-import 'package:neuro_care_hub_app/utils/methods/alert_dialog.dart';
 import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_button.dart';
 import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/text_form_field.dart';
 
+import '../utils/styles/text_styles.dart';
 import 'image_upload.dart';
 
 class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
@@ -15,112 +14,114 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
   final _formKey = GlobalKey<FormState>();
 
   final TumorController getxcontroller =
-      Get.put<TumorController>(TumorController());
+  Get.put<TumorController>(TumorController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffc2aed3),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-
-          Form(
-            key: _formKey,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ReusableTextFormField(
-                          controller: getxcontroller.namecontroller,
-                          hintText: 'Name',
-                          icon: Icons.person_outline,
-                          keyboardType: TextInputType.emailAddress,
-                          obscureText: false,
-                          onvalidation: (value) {
-                            return value!.isEmpty ? "Enter Your Name!" : null;
-                          },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical:50.0,horizontal: 8),
+        child: ListView(
+          children: [
+            Text(
+              "Disease Form",
+              style: TextStyles.boldDarkLargeTextStyle().copyWith(
+                color: Colors.purple,
+                fontSize: 25.0.sp,
+              ),
+              textAlign: TextAlign.left,
+              softWrap: true,
+            ),
+            SizedBox(height: 3.0.hp),
+            Text(
+              "Submit Your Form for Detecting Alzheimer Tumors Using Advanced AI",
+              style: TextStyles.boldDarkSmallTextStyle().copyWith(
+                color: Colors.black,
+              ),
+              textAlign: TextAlign.left,
+              softWrap: true,
+            ),
+            SizedBox(height: 3.0.hp),
+            Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ReusableTextFormField(
+                            controller: getxcontroller.namecontroller,
+                            hintText: 'Name',
+                            icon: Icons.person_outline,
+                            keyboardType: TextInputType.emailAddress,
+                            obscureText: false,
+                            onvalidation: (value) {
+                              return value!.isEmpty ? "Enter Your Name!" : null;
+                            },
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        width:
-                            10, // Adjust the width between the fields as needed
-                      ),
-                      Expanded(
-                        child: ReusableTextFormField(
-                          controller: getxcontroller.namecontroller,
-                          hintText: 'BrainTumor',
-                          icon: Icons.sick_rounded,
-                          keyboardType: TextInputType.emailAddress,
-                          obscureText: false,
-                          onvalidation: (value) {
-                            return value!.isEmpty ? "Enter Your Disease!" : null;
-                          },
+                        const SizedBox(
+                          width: 10, // Adjust the width between the fields as needed
                         ),
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(
-                    height: 2.0.hp,
-                  ),
-                  ReusableTextFormField(
-                    controller: getxcontroller.agecontroller,
-                    hintText: 'Age',
-                    icon: Icons.person,
-                    keyboardType: TextInputType.emailAddress,
-                    obscureText: false,
-                    onvalidation: (value) {
-                      return value!.isEmpty ? "Enter Your Age!" : null;
-                    },
-                  ),
-
-                  SizedBox(
-                    height: 2.0.hp,
-                  ),
-
-                  // text field password
-                  ReusableTextFormField(
-                    controller: getxcontroller.gendercontroller,
-                    hintText: 'Gender',
-                    icon: Icons.male,
-                    keyboardType: TextInputType.text,
-                    obscureText: true,
-                    onvalidation: (value) {
-                      return value!.isEmpty ? "Enter Your Gender!" : null;
-                    },
-                  ),
-
-                  SizedBox(
-                    height: 5.0.hp,
-                  ),
-                ],
+                        Expanded(
+                          child: ReusableTextFormField(
+                            controller: getxcontroller.diseasecontroller,
+                            hintText: 'Alzheimer',
+                            icon: Icons.sick_rounded,
+                            keyboardType: TextInputType.emailAddress,
+                            obscureText: false,
+                            onvalidation: (value) {
+                              return value!.isEmpty ? "Enter Your Disease!" : null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 2.0.hp),
+                    ReusableTextFormField(
+                      controller: getxcontroller.agecontroller,
+                      hintText: 'Age',
+                      icon: Icons.person,
+                      keyboardType: TextInputType.emailAddress,
+                      obscureText: false,
+                      onvalidation: (value) {
+                        return value!.isEmpty ? "Enter Your Age!" : null;
+                      },
+                    ),
+                    SizedBox(height: 2.0.hp),
+                    ReusableTextFormField(
+                      controller: getxcontroller.gendercontroller,
+                      hintText: 'Gender',
+                      icon: Icons.male,
+                      keyboardType: TextInputType.text,
+                      obscureText: false,
+                      onvalidation: (value) {
+                        return value!.isEmpty ? "Enter Your Gender!" : null;
+                      },
+                    ),
+                    SizedBox(height: 5.0.hp),
+                  ],
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 2.0.hp,
-          ),
-          // select button
-
-
-
-                SizedBox(
-                  height: 2.0.hp,
-                ),
-                ReusableButton(
-                 onTap: () => Get.to(()=>ImageUploadPage()),
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  text: "Submit",
-                  color: const Color(0xff664f9e),
-                ),
-              ],
-
-          ),
-
+            SizedBox(height: 2.0.hp),
+            ReusableButton(
+              onTap: () {
+                // Validate the form
+                if (_formKey.currentState!.validate()) {
+                  // Form is valid, proceed with submission
+                  Get.to(() => ImageUploadPage());
+                }
+              },
+              width: MediaQuery.of(context).size.width * 0.2,
+              text: "Submit",
+              color: const Color(0xff664f9e),
+            ),
+            SizedBox(height: 2.0.hp),
+          ],
+        ),
+      ),
     );
   }
 }

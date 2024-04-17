@@ -2,6 +2,7 @@ class UserModel {
   String? image;
   String? name;
   String? phone;
+  String? age;
 
   UserModel();
 
@@ -9,5 +10,6 @@ class UserModel {
     name = json['name'];
     phone = json['phone'];
     image = json['image'];
+    age = json['age'];
   }
 }

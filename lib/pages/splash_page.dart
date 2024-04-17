@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:neuro_care_hub_app/pages/login_page.dart';
 
 import 'onboarding_page.dart';
 
