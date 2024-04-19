@@ -16,7 +16,7 @@ class AboutPage extends StatelessWidget {
         foregroundColor: Colors.white,
         backgroundColor: const Color(0xff664f9e),
         title: Text(
-          "About Brain Tumor",
+          "About Tumor",
           style: TextStyles.boldDarkLargeTextStyle().copyWith(color: Colors.white),
         ),
       ),
@@ -86,8 +86,13 @@ class AboutPage extends StatelessWidget {
               ],
             ),
 
+            Text(
+              "Alzheimer's disease is a brain disorder that slowly destroys memory and thinking skills, and eventually, the ability to carry out the simplest tasks. In most people with Alzheimer's, symptoms first appear later in life.",
+              style: TextStyles.boldLightSmallTextStyle().copyWith(fontWeight: FontWeight.w200),
+              softWrap: true,
+            ),
             SizedBox(
-              height: 1.0.hp,
+              height: 2.0.hp,
             ),
 
             const Spacer(),

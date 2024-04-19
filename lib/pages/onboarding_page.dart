@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_button.dart';
-
+import 'admin_view.dart';
 import 'login_page.dart';
 
 class OnBoarding extends StatelessWidget {
@@ -48,8 +48,8 @@ class OnBoarding extends StatelessWidget {
             alignment: Alignment.center,
             child: ReusableButton(
               // onTap: () => homeController.navigateToLoginPage(),
-              onTap: () {},
-              text: "Login As Admin",
+              onTap: () => Get.to(() => AdminPage()),
+              text: "Login as Admin",
               color: const Color(0xff7c4c87),
               width: 60,
             ),

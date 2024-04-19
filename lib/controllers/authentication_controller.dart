@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class AuthenticationController extends GetxController {
+
+  TextEditingController adminloginEmailController = TextEditingController();
+  TextEditingController adminloginPasswordController = TextEditingController();
+
+
   TextEditingController loginEmailController = TextEditingController();
   TextEditingController loginPasswordController = TextEditingController();
 

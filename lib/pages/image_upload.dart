@@ -107,12 +107,12 @@ class ImageUploadPage extends GetView<TumorController> {
 
           ReusableButton(
             onTap: () async {
-              getxcontroller.isprofileloading(true);
-              await getxcontroller.storeUserInfo();
-              getxcontroller.isprofileloading(false);
+              // getxcontroller.isprofileloading(true);
+              // await getxcontroller.storeUserInfo();
+              // getxcontroller.isprofileloading(false);
             },
             width: MediaQuery.of(context).size.width * 0.2,
-            text: "Detect",
+            text: "Predict",
             color: const Color(0xff664f9e),
           ),
 

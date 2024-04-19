@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:neuro_care_hub_app/controllers/authentication_controller.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/styles/text_styles.dart';
+import '../controllers/admin_controller.dart';
+import '../controllers/authentication_controller.dart';
 import '../controllers/login_controller.dart';
-import '../utils/widgets/authentication pages/switch_authentication_page_row.dart';
 import '../utils/widgets/reusable widgets/text_form_field.dart';
 
-class LoginPage extends GetView<AuthenticationController> {
-  LoginPage({super.key});
+class AdminPage extends GetView<AdminController> {
+  AdminPage({super.key});
+
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
-  final LoginController getxcontroller =
-      Get.put<LoginController>(LoginController());
+
+  final AdminController getxcontroller =
+  Get.put<AdminController>(AdminController());
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthenticationController>(
@@ -38,7 +41,7 @@ class LoginPage extends GetView<AuthenticationController> {
             ),
             child: Padding(
               padding:
-                  EdgeInsets.symmetric(horizontal: 3.0.wp, vertical: 4.0.hp),
+              EdgeInsets.symmetric(horizontal: 3.0.wp, vertical: 4.0.hp),
               child: Column(
                 children: [
                   SizedBox(
@@ -47,9 +50,9 @@ class LoginPage extends GetView<AuthenticationController> {
 
                   // login text
                   Text(
-                    "Login",
+                    "Login as Admin",
                     style: TextStyles.boldDarkLargeTextStyle().copyWith(
-                      fontSize: 30.0.sp,
+                      fontSize: 20.0.sp,
                       color: const Color(0xffE2F0FA),
                     ),
                   ),
@@ -103,13 +106,13 @@ class LoginPage extends GetView<AuthenticationController> {
 
                   MaterialButton(
                     onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        getxcontroller.isProfileLoading(true);
-                        await getxcontroller.login(
-                            emailcontroller.text.toString(),
-                            passwordcontroller.text.toString());
-                        getxcontroller.isProfileLoading(false);
-                      }
+                      // if (_formKey.currentState!.validate()) {
+                      //   getxcontroller.isProfileLoading(true);
+                      //   await getxcontroller.login(
+                      //       emailcontroller.text.toString(),
+                      //       passwordcontroller.text.toString());
+                      //   getxcontroller.isProfileLoading(false);
+                      // }
                     },
                     height: 50,
                     minWidth: MediaQuery.of(context).size.width * 0.89,
@@ -122,28 +125,17 @@ class LoginPage extends GetView<AuthenticationController> {
                     child: Obx(() {
                       return getxcontroller.isProfileLoading.value
                           ? const CircularProgressIndicator(
-                              strokeWidth: 3, color: Colors.white)
+                          strokeWidth: 3, color: Colors.white)
                           : const Text(
-                              "Login",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            );
+                        "Login",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      );
                     }),
                   ),
 
-                  SizedBox(
-                    height: 5.0.hp,
-                  ),
 
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: SwitchAuthenticationPageRow(
-                      firstText: "Don't Have An Account?",
-                      secondText: "Sign Up",
-                      onTap: () => controller.navigateToSignUpPage(),
-                    ),
-                  ),
                 ],
               ),
             ),

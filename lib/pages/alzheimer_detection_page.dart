@@ -31,7 +31,7 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
             ),
             SizedBox(height: 3.0.hp),
             Text(
-              "Submit Your Form for Detecting Neuro Tumors Using Advanced AI",
+              "Submit Your Form for Detecting Alzheimer Tumors Using Advanced AI",
               style: TextStyles.boldDarkSmallTextStyle().copyWith(
                 color: Colors.black,
               ),
@@ -65,7 +65,7 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
                         Expanded(
                           child: ReusableTextFormField(
                             controller: getxcontroller.diseasecontroller,
-                            hintText: 'BrainTumor',
+                            hintText: 'Alzheimer',
                             icon: Icons.sick_rounded,
                             keyboardType: TextInputType.emailAddress,
                             obscureText: false,
@@ -108,7 +108,7 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
               onTap: () {
                 // Validate the form
                 if (_formKey.currentState!.validate()) {
-                  // Form is valid, proceed with submission
+
                   Get.to(() => ImageUploadPage());
                 }
               },

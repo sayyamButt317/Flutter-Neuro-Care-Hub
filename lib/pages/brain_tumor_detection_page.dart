@@ -33,7 +33,7 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
             ),
             SizedBox(height: 3.0.hp),
             Text(
-              "Submit Your Form for Detecting Alzheimer Tumors Using Advanced AI",
+              "Submit Your Form for Detecting Neuro Tumors Using Advanced AI",
               style: TextStyles.boldDarkSmallTextStyle().copyWith(
                 color: Colors.black,
               ),
@@ -67,7 +67,7 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
                         Expanded(
                           child: ReusableTextFormField(
                             controller: getxcontroller.diseasecontroller,
-                            hintText: 'Alzheimer',
+                            hintText: 'Brain Tumor',
                             icon: Icons.sick_rounded,
                             keyboardType: TextInputType.emailAddress,
                             obscureText: false,
