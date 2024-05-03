@@ -6,6 +6,7 @@ import 'package:neuro_care_hub_app/utils/styles/text_styles.dart';
 import '../controllers/login_controller.dart';
 import '../utils/widgets/authentication pages/switch_authentication_page_row.dart';
 import '../utils/widgets/reusable widgets/text_form_field.dart';
+import 'forget_password.dart';
 
 class LoginPage extends GetView<AuthenticationController> {
   LoginPage({super.key});
@@ -143,6 +144,22 @@ class LoginPage extends GetView<AuthenticationController> {
                       secondText: "Sign Up",
                       onTap: () => controller.navigateToSignUpPage(),
                     ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () => Get.to(() => Forgetpassword()),
+                        child: const Text(
+                          "Forget Password?",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

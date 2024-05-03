@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/controllers/home_controller.dart';
@@ -8,6 +9,7 @@ import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_but
 import '../utils/widgets/home page/circle_navigator.dart';
 import 'alzheimer_detection_page.dart';
 import 'brain_tumor_detection_page.dart';
+import 'login_page.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});
@@ -120,7 +122,13 @@ class HomePage extends GetView<HomeController> {
                 alignment: Alignment.center,
                 child: ReusableButton(
                   // onTap: () => homeController.navigateToLoginPage(),
-                  onTap: () {},
+                  onTap: () async {
+                    FirebaseAuth auth = FirebaseAuth.instance;
+                      await auth.signOut();
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                            builder: (context) => LoginPage()));
+                  },
                   text: "Logout",
                   color: const Color(0xff7c4c87),
                   width: 60,

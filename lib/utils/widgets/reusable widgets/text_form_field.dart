@@ -41,7 +41,7 @@ class ReusableTextFormField extends StatelessWidget {
       maxLines: maxLines,
       obscureText: obscureText,
       minLines: 1,
-      cursorColor: Colors.transparent,
+      cursorColor: Colors.black,
       cursorErrorColor: Colors.transparent,
       keyboardType: keyboardType,
       decoration: InputDecoration(
