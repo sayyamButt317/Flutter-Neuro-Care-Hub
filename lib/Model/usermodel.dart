@@ -1,15 +1,15 @@
 class UserModel {
-  String? image;
   String? name;
   String? phone;
-  String? age;
+  String? image;
 
-  UserModel();
+  UserModel({this.name, this.phone, this.image});
 
-  UserModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    phone = json['phone'];
-    image = json['image'];
-    age = json['age'];
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      name: json['name'],
+      phone: json['phone'],
+      image: json['image'],
+    );
   }
 }

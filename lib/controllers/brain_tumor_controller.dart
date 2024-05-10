@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:typed_data';
+import 'package:flutter/services.dart';
 import 'package:path/path.dart' as Path;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -60,13 +62,13 @@ class TumorController extends GetxController {
   Future<void> storeUserInfo() async {
     try {
       final uid = FirebaseAuth.instance.currentUser!.uid;
-    
+
       await FirebaseFirestore.instance.collection('patient_info').doc(uid).set(
         {
           'name': namecontroller.text,
           'age': agecontroller.text,
           'gender': gendercontroller.text,
-          'disease':diseasecontroller.text,
+          'disease': diseasecontroller.text,
         },
       );
     } catch (error) {

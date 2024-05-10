@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
@@ -6,6 +7,7 @@ import '../controllers/admin_controller.dart';
 import '../controllers/authentication_controller.dart';
 import '../controllers/login_controller.dart';
 import '../utils/widgets/reusable widgets/text_form_field.dart';
+import 'admin_page.dart';
 
 class AdminPage extends GetView<AdminController> {
   AdminPage({super.key});
@@ -16,7 +18,32 @@ class AdminPage extends GetView<AdminController> {
   final TextEditingController passwordcontroller = TextEditingController();
 
   final AdminController getxcontroller =
+
   Get.put<AdminController>(AdminController());
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  Future<void> login(String email, String password) async {
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      Get.offAll(()=>const AdminScreen() );
+    } catch (error) {
+      // Show error snackbar
+      Get.snackbar(
+        "Error",
+        "Failed to Login: $error",
+        snackPosition: SnackPosition.BOTTOM,
+        snackStyle: SnackStyle.FLOATING,
+        borderColor: Colors.red,
+        colorText: Colors.red,
+        titleText: const Text(
+          "Error",
+          style: TextStyle(color: Colors.white),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,13 +133,13 @@ class AdminPage extends GetView<AdminController> {
 
                   MaterialButton(
                     onPressed: () async {
-                      // if (_formKey.currentState!.validate()) {
-                      //   getxcontroller.isProfileLoading(true);
-                      //   await getxcontroller.login(
-                      //       emailcontroller.text.toString(),
-                      //       passwordcontroller.text.toString());
-                      //   getxcontroller.isProfileLoading(false);
-                      // }
+                      if (_formKey.currentState!.validate()) {
+                        getxcontroller.isProfileLoading(true);
+                        await login(
+                            emailcontroller.text.toString(),
+                            passwordcontroller.text.toString());
+                        getxcontroller.isProfileLoading(false);
+                      }
                     },
                     height: 50,
                     minWidth: MediaQuery.of(context).size.width * 0.89,

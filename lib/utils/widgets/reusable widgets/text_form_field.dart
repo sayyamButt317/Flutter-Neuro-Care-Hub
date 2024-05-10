@@ -5,8 +5,8 @@ import '../../styles/text_field_borders_styles.dart';
 import '../../styles/text_styles.dart';
 
 class ReusableTextFormField extends StatelessWidget {
-  const ReusableTextFormField({
-    Key? key,
+  const  ReusableTextFormField({
+    super.key,
     required this.controller,
     this.hintText,
     required this.icon,
@@ -16,7 +16,7 @@ class ReusableTextFormField extends StatelessWidget {
     required this.onvalidation,
     this.text,
     this.readOnly,
-  }) : super(key: key);
+  });
 
   final TextEditingController controller;
   final String? hintText;

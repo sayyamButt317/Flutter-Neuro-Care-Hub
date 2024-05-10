@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 
@@ -5,15 +6,15 @@ import '../../styles/text_styles.dart';
 
 class CircleNavigator extends StatelessWidget {
   const CircleNavigator({
-    super.key,
+    Key? key,
     required this.onTap,
-    required this.icon,
     required this.text,
-  });
+    required this.imageAssetPath, // For displaying an image
+  }) : super(key: key);
 
   final GestureTapCallback onTap;
-  final IconData icon;
   final String text;
+  final String? imageAssetPath; // Corrected to a string for local image path
 
   @override
   Widget build(BuildContext context) {
@@ -25,24 +26,26 @@ class CircleNavigator extends StatelessWidget {
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: Color(0xff7c4c87),
+          color: Colors.white70,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              color: const Color(0xffE2F0FA),
-              size: 40.0.sp,
-            ),
+            // Use CircleAvatar for displaying images
+            imageAssetPath != null
+                ? CircleAvatar(
+                    radius: 50, // Adjust the radius as needed
+                    backgroundImage: AssetImage(imageAssetPath!),
+                  )
+                : Container(),
             SizedBox(
               height: 1.25.hp,
             ),
             Text(
               text,
               style: TextStyles.boldDarkSmallTextStyle().copyWith(
-                color: const Color(0xffE2F0FA),
+                color: Colors.black,
                 fontSize: 12.0.sp,
               ),
             ),

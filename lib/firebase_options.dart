@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAzCNEoSn49kOiwHm8FUrcO0Ou-7HK5Ehc',
-    appId: '1:715107384147:android:e0c0c868bfbeca89a63fa6',
-    messagingSenderId: '715107384147',
-    projectId: 'neuroskincare-46f7b',
-    storageBucket: 'neuroskincare-46f7b.appspot.com',
+    apiKey: 'AIzaSyAEXWTQy5Yuekr3zn57-tm3eoMSUiHh1jA',
+    appId: '1:1094923951652:android:4d36021b1ad579bb2c82b1',
+    messagingSenderId: '1094923951652',
+    projectId: 'neuro-24a0c',
+    storageBucket: 'neuro-24a0c.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAA0DmYz3m5QFzL8y4EZoO0gAO3bATSZOQ',
-    appId: '1:715107384147:ios:5dcbcaa69b1dd527a63fa6',
-    messagingSenderId: '715107384147',
-    projectId: 'neuroskincare-46f7b',
-    storageBucket: 'neuroskincare-46f7b.appspot.com',
+    apiKey: 'AIzaSyCX2Zf-4Wc0ki-GHV3hE0bHV9xwc7KdW_0',
+    appId: '1:1094923951652:ios:bd5f439e6faafb072c82b1',
+    messagingSenderId: '1094923951652',
+    projectId: 'neuro-24a0c',
+    storageBucket: 'neuro-24a0c.appspot.com',
     iosBundleId: 'com.example.neuroCareHubApp',
   );
 

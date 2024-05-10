@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "715107384147",
-    "project_id": "neuroskincare-46f7b",
-    "storage_bucket": "neuroskincare-46f7b.appspot.com"
+    "project_number": "1094923951652",
+    "project_id": "neuro-24a0c",
+    "storage_bucket": "neuro-24a0c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:715107384147:android:e0c0c868bfbeca89a63fa6",
+        "mobilesdk_app_id": "1:1094923951652:android:4d36021b1ad579bb2c82b1",
         "android_client_info": {
           "package_name": "com.example.neuro_care_hub_app"
         }
@@ -15,26 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAzCNEoSn49kOiwHm8FUrcO0Ou-7HK5Ehc"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:715107384147:android:1476aae7e7132f7ea63fa6",
-        "android_client_info": {
-          "package_name": "com.example.tumordetector"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAzCNEoSn49kOiwHm8FUrcO0Ou-7HK5Ehc"
+          "current_key": "AIzaSyAEXWTQy5Yuekr3zn57-tm3eoMSUiHh1jA"
         }
       ],
       "services": {

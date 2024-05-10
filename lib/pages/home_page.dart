@@ -60,14 +60,13 @@ class HomePage extends GetView<HomeController> {
                 height: 13.0.hp,
               ),
 
-              // get to know, btd text option
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CircleNavigator(
-                    onTap: () => Get.to (() => AlzheimerDetectionPage()),
-                    icon: Icons.calendar_today_outlined,
+                    onTap: () => Get.to(() => AlzheimerDetectionPage()),
+                    imageAssetPath: 'assets/images/faq.png',
                     text: "About",
                   ),
                   SizedBox(
@@ -79,8 +78,8 @@ class HomePage extends GetView<HomeController> {
                         height: 3.0.hp,
                       ),
                       CircleNavigator(
-                        onTap: () => Get.to (() => BrainTumorDetectionPage()),
-                        icon: Icons.health_and_safety_outlined,
+                        onTap: () => Get.to(() => BrainTumorDetectionPage()),
+                        imageAssetPath: 'assets/images/medical.png',
                         text: "BTD Test",
                       ),
                     ],
@@ -95,7 +94,7 @@ class HomePage extends GetView<HomeController> {
                 children: [
                   CircleNavigator(
                     onTap: () => controller.navigateToHelpPage(),
-                    icon: Icons.help_outline,
+                    imageAssetPath: 'assets/images/help.png',
                     text: "Help",
                   ),
                   SizedBox(
@@ -108,7 +107,7 @@ class HomePage extends GetView<HomeController> {
                       ),
                       CircleNavigator(
                         onTap: () => controller.navigateToADPage(),
-                        icon: Icons.health_and_safety_outlined,
+                        imageAssetPath: 'assets/images/adp.png',
                         text: "AD Test",
                       ),
                     ],
@@ -124,10 +123,9 @@ class HomePage extends GetView<HomeController> {
                   // onTap: () => homeController.navigateToLoginPage(),
                   onTap: () async {
                     FirebaseAuth auth = FirebaseAuth.instance;
-                      await auth.signOut();
+                    await auth.signOut();
                     Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (context) => LoginPage()));
+                        MaterialPageRoute(builder: (context) => LoginPage()));
                   },
                   text: "Logout",
                   color: const Color(0xff7c4c87),

@@ -12,9 +12,7 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
   BrainTumorDetectionPage({super.key});
 
   final _formKey = GlobalKey<FormState>();
-
-  final TumorController getxcontroller =
-  Get.put<TumorController>(TumorController());
+  final TumorController getxcontroller =Get.put(TumorController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +108,9 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
               onTap: () {
                 // Validate the form
                 if (_formKey.currentState!.validate()) {
-                  // Form is valid, proceed with submission
+                  getxcontroller.storeUserInfo(
+
+                  );
                   Get.to(() => ImageUploadPage());
                 }
               },
