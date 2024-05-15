@@ -7,6 +7,7 @@ import 'package:neuro_care_hub_app/utils/styles/text_styles.dart';
 import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_button.dart';
 
 import '../utils/widgets/home page/circle_navigator.dart';
+import 'about_page.dart';
 import 'alzheimer_detection_page.dart';
 import 'brain_tumor_detection_page.dart';
 import 'login_page.dart';
@@ -65,7 +66,7 @@ class HomePage extends GetView<HomeController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CircleNavigator(
-                    onTap: () => Get.to(() => AlzheimerDetectionPage()),
+                    onTap: () => Get.to(() => const AboutPage()),
                     imageAssetPath: 'assets/images/faq.png',
                     text: "About",
                   ),

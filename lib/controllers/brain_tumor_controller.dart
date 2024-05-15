@@ -11,16 +11,18 @@ import 'package:image_picker/image_picker.dart';
 import 'package:neuro_care_hub_app/Model/usermodel.dart';
 
 class TumorController extends GetxController {
-  final TextEditingController namecontroller = TextEditingController();
-  final TextEditingController agecontroller = TextEditingController();
-  final TextEditingController gendercontroller = TextEditingController();
+  final TextEditingController firstnamecontroller = TextEditingController();
+  final TextEditingController lastnamecontroller = TextEditingController();
   final TextEditingController diseasecontroller = TextEditingController();
+  final TextEditingController addresscontroller = TextEditingController();
+  final TextEditingController citycontroller = TextEditingController();
+  final TextEditingController statecontroller = TextEditingController();
 
   var isprofileloading = false.obs;
   void setIsProfileLoading(bool isLoading) {
     isprofileloading.value = isLoading;
   }
-
+RxString gender = "".obs;
   var myuser = UserModel().obs;
 
   RxString imageUrl = RxString('');
@@ -65,10 +67,13 @@ class TumorController extends GetxController {
 
       await FirebaseFirestore.instance.collection('patient_info').doc(uid).set(
         {
-          'name': namecontroller.text,
-          'age': agecontroller.text,
-          'gender': gendercontroller.text,
+          'firstname': firstnamecontroller.text,
+          'lastname':lastnamecontroller.text,
+          'address': addresscontroller.text,
+          'city': citycontroller.text,
           'disease': diseasecontroller.text,
+          'state':statecontroller.text,
+          'gender': gender.value,
         },
       );
     } catch (error) {
@@ -94,8 +99,14 @@ class TumorController extends GetxController {
         .listen((event) {
       myuser.value = UserModel.fromJson(event.data() ?? {});
       imageUrl.value = myuser.value.image ?? '';
-      namecontroller.text = myuser.value.name ?? '';
-      agecontroller.text = myuser.value.phone ?? '';
+      firstnamecontroller.text = myuser.value.name ?? '';
+      lastnamecontroller.text =myuser.value.lastname?? '';
+      diseasecontroller.text = myuser.value.disease?? '';
+      addresscontroller.text = myuser.value.address ?? '';
+      citycontroller.text = myuser.value.city?? '';
+      statecontroller.text = myuser.value.state ?? '';
+      gender.value = myuser.value.gender ?? '';
+
     });
   }
 }

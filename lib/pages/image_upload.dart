@@ -77,9 +77,6 @@ class ImageUploadPage extends GetView<TumorController> {
           ReusableButton(
             onTap: () async {
               getxcontroller.isprofileloading(true);
-              // Perform inference for brain tumor prediction
-              // String result = await getxcontroller.predictBrainTumor();
-              // Show result
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(

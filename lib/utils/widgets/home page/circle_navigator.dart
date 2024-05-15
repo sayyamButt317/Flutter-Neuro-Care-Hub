@@ -6,11 +6,11 @@ import '../../styles/text_styles.dart';
 
 class CircleNavigator extends StatelessWidget {
   const CircleNavigator({
-    Key? key,
+    super.key,
     required this.onTap,
     required this.text,
     required this.imageAssetPath, // For displaying an image
-  }) : super(key: key);
+  });
 
   final GestureTapCallback onTap;
   final String text;
@@ -35,7 +35,7 @@ class CircleNavigator extends StatelessWidget {
             // Use CircleAvatar for displaying images
             imageAssetPath != null
                 ? CircleAvatar(
-                    radius: 50, // Adjust the radius as needed
+                    radius: 25,
                     backgroundImage: AssetImage(imageAssetPath!),
                   )
                 : Container(),
