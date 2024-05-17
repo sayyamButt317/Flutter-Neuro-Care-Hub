@@ -95,7 +95,7 @@ class ImageUploadPage extends GetView<TumorController> {
               getxcontroller.isprofileloading(false);
             },
             width: MediaQuery.of(context).size.width * 0.2,
-            text: "Predict Brain Tumor",
+            text: "Predict ",
             color: const Color(0xff664f9e),
           ),
         ],

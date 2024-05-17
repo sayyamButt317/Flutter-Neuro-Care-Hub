@@ -4,15 +4,17 @@ import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_button.dart';
 
 import '../controllers/alzheimer_controller.dart';
+import '../controllers/brain_tumor_controller.dart';
 import '../utils/styles/text_styles.dart';
+import '../utils/widgets/RadioButton/radio_button.dart';
 import '../utils/widgets/reusable widgets/text_form_field.dart';
 import 'image_upload.dart';
 
 class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
    AlzheimerDetectionPage({super.key});
   final _formKey = GlobalKey<FormState>();
-  final AlzheimerController getxcontroller =
-  Get.put<AlzheimerController>(AlzheimerController());
+   final TumorController getxcontroller = Get.put(TumorController());
+   final GenderController genderController = Get.put(GenderController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +41,7 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
               softWrap: true,
             ),
             SizedBox(height: 3.0.hp),
+            SizedBox(height: 3.0.hp),
             Form(
               key: _formKey,
               child: Padding(
@@ -49,8 +52,8 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
                       children: [
                         Expanded(
                           child: ReusableTextFormField(
-                            controller: getxcontroller.namecontroller,
-                            hintText: 'Name',
+                            controller: getxcontroller.firstnamecontroller,
+                            hintText: 'First',
                             icon: Icons.person_outline,
                             keyboardType: TextInputType.emailAddress,
                             obscureText: false,
@@ -64,39 +67,78 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
                         ),
                         Expanded(
                           child: ReusableTextFormField(
-                            controller: getxcontroller.diseasecontroller,
-                            hintText: 'Alzheimer',
-                            icon: Icons.sick_rounded,
+                            controller: getxcontroller.lastnamecontroller,
+                            hintText: 'Last',
+                            icon: Icons.person_outline,
                             keyboardType: TextInputType.emailAddress,
                             obscureText: false,
                             onvalidation: (value) {
-                              return value!.isEmpty ? "Enter Your Disease!" : null;
+                              return value!.isEmpty ? "Enter Your Name!" : null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10, // Adjust the width between the fields as needed
+                        ),
+
+                      ],
+                    ),
+                    SizedBox(height: 2.0.hp),
+                    const GenderRadioButton(),
+                    ReusableTextFormField(
+                      controller: getxcontroller.diseasecontroller,
+                      hintText: 'Medical History',
+                      icon: Icons.sick_rounded,
+                      keyboardType: TextInputType.emailAddress,
+                      obscureText: false,
+                      onvalidation: (value) {
+                        return value!.isEmpty ? "Enter Your Disease!" : null;
+                      },
+                    ),
+                    SizedBox(height: 2.0.hp),
+
+
+                    ReusableTextFormField(
+                      controller: getxcontroller.addresscontroller,
+                      hintText: 'Address',
+                      icon: Icons.home,
+                      keyboardType: TextInputType.emailAddress,
+                      obscureText: false,
+                      onvalidation: (value) {
+                        return value!.isEmpty ? "Enter Your Address!" : null;
+                      },
+                    ),
+                    SizedBox(height: 2.0.hp),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ReusableTextFormField(
+                            controller: getxcontroller.citycontroller,
+                            hintText: 'City',
+                            icon: Icons.location_city_rounded,
+                            keyboardType: TextInputType.text,
+                            obscureText: false,
+                            onvalidation: (value) {
+                              return value!.isEmpty ? "Enter Your City!" : null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10, // Adjust the width between the fields as needed
+                        ),
+                        Expanded(
+                          child: ReusableTextFormField(
+                            controller: getxcontroller.statecontroller,
+                            hintText: 'State',
+                            icon: Icons.real_estate_agent_outlined,
+                            keyboardType: TextInputType.text,
+                            obscureText: false,
+                            onvalidation: (value) {
+                              return value!.isEmpty ? "Enter Your City!" : null;
                             },
                           ),
                         ),
                       ],
-                    ),
-                    SizedBox(height: 2.0.hp),
-                    ReusableTextFormField(
-                      controller: getxcontroller.agecontroller,
-                      hintText: 'Age',
-                      icon: Icons.person,
-                      keyboardType: TextInputType.emailAddress,
-                      obscureText: false,
-                      onvalidation: (value) {
-                        return value!.isEmpty ? "Enter Your Age!" : null;
-                      },
-                    ),
-                    SizedBox(height: 2.0.hp),
-                    ReusableTextFormField(
-                      controller: getxcontroller.gendercontroller,
-                      hintText: 'Gender',
-                      icon: Icons.male,
-                      keyboardType: TextInputType.text,
-                      obscureText: false,
-                      onvalidation: (value) {
-                        return value!.isEmpty ? "Enter Your Gender!" : null;
-                      },
                     ),
                     SizedBox(height: 5.0.hp),
                   ],
@@ -108,7 +150,9 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
               onTap: () {
                 // Validate the form
                 if (_formKey.currentState!.validate()) {
+                  getxcontroller.storeUserInfo(
 
+                  );
                   Get.to(() => ImageUploadPage());
                 }
               },

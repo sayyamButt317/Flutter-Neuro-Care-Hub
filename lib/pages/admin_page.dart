@@ -1,53 +1,143 @@
-import 'package:flutter/cupertino.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import '../Model/usermodel.dart';
+// import '../controllers/brain_tumor_controller.dart';
+//
+// class AdminScreen extends StatefulWidget {
+//   const AdminScreen({super.key});
+//
+//   @override
+//   State<AdminScreen> createState() => _AdminScreenState();
+// }
+//
+// class _AdminScreenState extends State<AdminScreen> {
+//   @override
+//   void initState() {
+//     super.initState();
+//   }
+//
+//
+//   final TumorController getxcontroller = Get.put(TumorController());
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Admin Screen'),
+//       ),
+//
+//
+//
+//       // body: getxcontroller.allUsers.isEmpty
+//       //     ? const Center(child: CircularProgressIndicator())
+//       //     : ListView.builder(
+//       //         itemCount: getxcontroller.allUsers.length,
+//       //         itemBuilder: (context, index) {
+//       //           final user = getxcontroller.allUsers[index];
+//       //           return Container(
+//       //             margin: const EdgeInsets.all(8.0),
+//       //             padding: const EdgeInsets.all(8.0),
+//       //             decoration: BoxDecoration(
+//       //               border: Border.all(color: Colors.grey),
+//       //               borderRadius: BorderRadius.circular(8.0),
+//       //             ),
+//       //             child: Column(
+//       //               crossAxisAlignment: CrossAxisAlignment.start,
+//       //               children: [
+//       //                 Text('First Name: ${user.name ?? ''}'),
+//       //                 Text('Last Name: ${user.lastname ?? ''}'),
+//       //                 Text('Disease: ${user.disease ?? ''}'),
+//       //                 Text('Address: ${user.address ?? ''}'),
+//       //                 Text('City: ${user.city ?? ''}'),
+//       //                 Text('State: ${user.state ?? ''}'),
+//       //
+//       //                 // Add more fields here as needed
+//       //               ],
+//       //             ),
+//       //           );
+//       //         },
+//       //       ),
+//     );
+//   }
+// }
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../controllers/brain_tumor_controller.dart';
-
-class AdminScreen extends StatefulWidget {
+class AdminScreen extends StatelessWidget {
   const AdminScreen({super.key});
-
-  @override
-  State<AdminScreen> createState() => _AdminScreenState();
-}
-
-class _AdminScreenState extends State<AdminScreen> {
-  final TumorController tumorController = Get.put(TumorController());
-
-  @override
-  void initState() {
-    // Fetch user info when the screen loads
-    tumorController.getuserinfo();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Admin Screen'),
+        title: const Text('Patient Record'),
       ),
-      body: Obx(() {
-        // Check if user data is loading
-        if (tumorController.isprofileloading.value) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
-        // Check if user data is available
-        if (tumorController.myuser.value.name != null) {
-          return ListView.builder(
-            itemCount: 1, // Assuming you only want to display one user's data
-            itemBuilder: (context, index) {
-              final user = tumorController.myuser.value;
-              return ListTile(
-                title: Text(user.name ?? ''),
-              );
-            },
-          );
-        } else {
-          return const Center(child: Text('No user data found'));
-        }
-      }),
+      body: const Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'User Name:',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              '', // Replace with actual user name
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Address:',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              '123 Main Street, City, Country', // Replace with actual address
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Medical History:',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Medical History details here...', // Replace with actual medical history
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'State:',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Healthy', // Replace with actual state
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

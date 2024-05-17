@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
-import 'package:flutter/services.dart';
 import 'package:path/path.dart' as Path;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,12 +15,13 @@ class TumorController extends GetxController {
   final TextEditingController addresscontroller = TextEditingController();
   final TextEditingController citycontroller = TextEditingController();
   final TextEditingController statecontroller = TextEditingController();
-
+  RxList<UserModel> allUsers = RxList<UserModel>();
   var isprofileloading = false.obs;
   void setIsProfileLoading(bool isLoading) {
     isprofileloading.value = isLoading;
   }
-RxString gender = "".obs;
+
+  RxString gender = "".obs;
   var myuser = UserModel().obs;
 
   RxString imageUrl = RxString('');
@@ -68,11 +67,11 @@ RxString gender = "".obs;
       await FirebaseFirestore.instance.collection('patient_info').doc(uid).set(
         {
           'firstname': firstnamecontroller.text,
-          'lastname':lastnamecontroller.text,
+          'lastname': lastnamecontroller.text,
           'address': addresscontroller.text,
           'city': citycontroller.text,
           'disease': diseasecontroller.text,
-          'state':statecontroller.text,
+          'state': statecontroller.text,
           'gender': gender.value,
         },
       );
@@ -90,23 +89,45 @@ RxString gender = "".obs;
     }
   }
 
+
+  // Future<void> getuserinfo() async {
+  //   final uid = FirebaseAuth.instance.currentUser!.uid;
+  //   FirebaseFirestore.instance
+  //       .collection('patient_info')
+  //       .doc(uid)
+  //       .snapshots()
+  //       .listen((event) {
+  //     // Explicitly cast the result to Map<String, dynamic>
+  //     final Map<String, dynamic> userData = event.data() as Map<String, dynamic>;
+  //     myuser.value = UserModel.fromJson(userData);
+  //     imageUrl.value = myuser.value.image ?? '';
+  //     firstnamecontroller.text = myuser.value.name ?? '';
+  //     lastnamecontroller.text = myuser.value.lastname ?? '';
+  //     diseasecontroller.text = myuser.value.disease ?? '';
+  //     addresscontroller.text = myuser.value.address ?? '';
+  //     citycontroller.text = myuser.value.city ?? '';
+  //     statecontroller.text = myuser.value.state ?? '';
+  //     gender.value = myuser.value.gender ?? '';
+  //   });
+  // }
   Future<void> getuserinfo() async {
-    final uid = FirebaseAuth.instance.currentUser!.uid;
     FirebaseFirestore.instance
         .collection('patient_info')
-        .doc(uid)
-        .snapshots()
-        .listen((event) {
-      myuser.value = UserModel.fromJson(event.data() ?? {});
-      imageUrl.value = myuser.value.image ?? '';
-      firstnamecontroller.text = myuser.value.name ?? '';
-      lastnamecontroller.text =myuser.value.lastname?? '';
-      diseasecontroller.text = myuser.value.disease?? '';
-      addresscontroller.text = myuser.value.address ?? '';
-      citycontroller.text = myuser.value.city?? '';
-      statecontroller.text = myuser.value.state ?? '';
-      gender.value = myuser.value.gender ?? '';
-
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> snapshot) {
+      if (snapshot.docs.isNotEmpty) {
+        // Iterate through each document in the collection
+        snapshot.docs.forEach((DocumentSnapshot<Map<String, dynamic>> doc) {
+          // Check if the data is not null
+          if (doc.data() != null) {
+            // Convert each document to a UserModel object
+            UserModel user = UserModel.fromJson(doc.data()!);
+            // Add the user to a list or perform any other operation as needed
+            allUsers.add(user);
+          }
+        });
+      }
     });
   }
+
 }

@@ -87,7 +87,7 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
                  const GenderRadioButton(),
                     ReusableTextFormField(
                       controller: getxcontroller.diseasecontroller,
-                      hintText: 'Brain Tumor',
+                      hintText: 'Medical History',
                       icon: Icons.sick_rounded,
                       keyboardType: TextInputType.emailAddress,
                       obscureText: false,
@@ -101,7 +101,7 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
                     ReusableTextFormField(
                       controller: getxcontroller.addresscontroller,
                       hintText: 'Address',
-                      icon: Icons.person,
+                      icon: Icons.home,
                       keyboardType: TextInputType.emailAddress,
                       obscureText: false,
                       onvalidation: (value) {
@@ -115,7 +115,7 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
                           child: ReusableTextFormField(
                             controller: getxcontroller.citycontroller,
                             hintText: 'City',
-                            icon: Icons.male,
+                            icon: Icons.location_city_rounded,
                             keyboardType: TextInputType.text,
                             obscureText: false,
                             onvalidation: (value) {
@@ -130,7 +130,7 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
                           child: ReusableTextFormField(
                             controller: getxcontroller.statecontroller,
                             hintText: 'State',
-                            icon: Icons.male,
+                            icon: Icons.real_estate_agent_outlined,
                             keyboardType: TextInputType.text,
                             obscureText: false,
                             onvalidation: (value) {
