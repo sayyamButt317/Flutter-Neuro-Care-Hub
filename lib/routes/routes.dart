@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/pages/about_page.dart';
+import 'package:neuro_care_hub_app/pages/admin_login.dart';
+import 'package:neuro_care_hub_app/pages/admin_page.dart';
 import 'package:neuro_care_hub_app/pages/alzheimer_detection_page.dart';
 import 'package:neuro_care_hub_app/pages/contact_us_page.dart';
 import 'package:neuro_care_hub_app/pages/home_page.dart';
@@ -19,6 +21,8 @@ class AppRoutes {
   static const BTD = '/btd';
   static const AD = '/ad';
   static const PROFILE = '/profile';
+  static const ADMINHOME = '/adminhome';
+  static const ADMINLOGIN = '/adminlogin';
 
   static final routes = [
     GetPage(
@@ -47,11 +51,19 @@ class AppRoutes {
     ),
     GetPage(
       name: BTD,
-      page: () =>  BrainTumorDetectionPage(),
+      page: () => BrainTumorDetectionPage(),
     ),
     GetPage(
       name: AD,
       page: () => AlzheimerDetectionPage(),
+    ),
+    GetPage(
+      name: ADMINHOME,
+      page: () => const AdminScreen(),
+    ),
+    GetPage(
+      name: ADMINLOGIN,
+      page: () => AdminPage(),
     ),
   ];
 }

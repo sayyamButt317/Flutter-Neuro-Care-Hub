@@ -1,56 +1,27 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/styles/text_styles.dart';
+import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/text_form_field.dart';
 import '../controllers/admin_controller.dart';
 import '../controllers/authentication_controller.dart';
 import '../controllers/login_controller.dart';
-import '../utils/widgets/reusable widgets/text_form_field.dart';
-import 'admin_page.dart';
 
 class AdminPage extends GetView<AdminController> {
   AdminPage({super.key});
-
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
 
-  final AdminController getxcontroller =
-
-  Get.put<AdminController>(AdminController());
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  Future<void> login(String email, String password) async {
-    try {
-      await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      Get.offAll(()=>const AdminScreen() );
-    } catch (error) {
-      // Show error snackbar
-      Get.snackbar(
-        "Error",
-        "Failed to Login: $error",
-        snackPosition: SnackPosition.BOTTOM,
-        snackStyle: SnackStyle.FLOATING,
-        borderColor: Colors.red,
-        colorText: Colors.red,
-        titleText: const Text(
-          "Error",
-          style: TextStyle(color: Colors.white),
-        ),
-      );
-    }
-  }
+  final LoginController getxcontroller =
+      Get.put<LoginController>(LoginController());
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthenticationController>(
-      builder: (controller) {
+      builder: (authController) {
         return Scaffold(
-
           resizeToAvoidBottomInset: false,
           extendBody: true,
           extendBodyBehindAppBar: true,
@@ -68,14 +39,10 @@ class AdminPage extends GetView<AdminController> {
             ),
             child: Padding(
               padding:
-              EdgeInsets.symmetric(horizontal: 3.0.wp, vertical: 4.0.hp),
+                  EdgeInsets.symmetric(horizontal: 3.0.wp, vertical: 4.0.hp),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 15.0.hp,
-                  ),
-
-                  // login text
+                  SizedBox(height: 15.0.hp),
                   Text(
                     "Login as Admin",
                     style: TextStyles.boldDarkLargeTextStyle().copyWith(
@@ -83,12 +50,7 @@ class AdminPage extends GetView<AdminController> {
                       color: const Color(0xffE2F0FA),
                     ),
                   ),
-
-                  SizedBox(
-                    height: 10.0.hp,
-                  ),
-
-                  // text field email
+                  SizedBox(height: 10.0.hp),
                   Form(
                     key: _formKey,
                     child: Column(
@@ -100,17 +62,10 @@ class AdminPage extends GetView<AdminController> {
                           keyboardType: TextInputType.emailAddress,
                           obscureText: false,
                           onvalidation: (value) {
-                            return value!.isEmpty
-                                ? "Enter Your Email!"
-                                : null;
+                            return value!.isEmpty ? "Enter Your Email!" : null;
                           },
                         ),
-
-                        SizedBox(
-                          height: 2.0.hp,
-                        ),
-
-                        // text field password
+                        SizedBox(height: 2.0.hp),
                         ReusableTextFormField(
                           controller: passwordcontroller,
                           hintText: 'Password',
@@ -123,21 +78,18 @@ class AdminPage extends GetView<AdminController> {
                                 : null;
                           },
                         ),
-
-                        SizedBox(
-                          height: 5.0.hp,
-                        ),
+                        SizedBox(height: 5.0.hp),
                       ],
                     ),
                   ),
-
                   MaterialButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         getxcontroller.isProfileLoading(true);
-                        await login(
-                            emailcontroller.text.toString(),
-                            passwordcontroller.text.toString());
+                        await getxcontroller.adminlogin(
+                          emailcontroller.text.toString(),
+                          passwordcontroller.text.toString(),
+                        );
                         getxcontroller.isProfileLoading(false);
                       }
                     },
@@ -152,17 +104,13 @@ class AdminPage extends GetView<AdminController> {
                     child: Obx(() {
                       return getxcontroller.isProfileLoading.value
                           ? const CircularProgressIndicator(
-                          strokeWidth: 3, color: Colors.white)
+                              strokeWidth: 3, color: Colors.white)
                           : const Text(
-                        "Login",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      );
+                              "Login",
+                              style: TextStyle(color: Colors.white),
+                            );
                     }),
                   ),
-
-
                 ],
               ),
             ),

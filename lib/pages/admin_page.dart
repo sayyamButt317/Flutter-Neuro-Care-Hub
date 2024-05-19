@@ -60,7 +60,13 @@
 //     );
 //   }
 // }
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:neuro_care_hub_app/pages/onboarding_page.dart';
+import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
+import 'package:neuro_care_hub_app/utils/styles/text_styles.dart';
+import 'package:neuro_care_hub_app/utils/widgets/home%20page/circle_navigator.dart';
+import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_button.dart';
 
 class AdminScreen extends StatelessWidget {
   const AdminScreen({super.key});
@@ -68,74 +74,113 @@ class AdminScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Patient Record'),
-      ),
-      body: const Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'User Name:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+      backgroundColor: const Color(0xffb7a7da),
+      resizeToAvoidBottomInset: false,
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 4.0.wp, vertical: 1.5.hp),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 3.0.hp,
               ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              '', // Replace with actual user name
-              style: TextStyle(
-                fontSize: 16,
+
+              // welcome text
+              Text(
+                "Welcome Admin ",
+                style: TextStyles.boldDarkLargeTextStyle().copyWith(
+                  color: Colors.white,
+                  fontSize: 25.0.sp,
+                ),
+                textAlign: TextAlign.left,
+                softWrap: true,
               ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Address:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+
+              SizedBox(
+                height: 1.0.hp,
               ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              '123 Main Street, City, Country', // Replace with actual address
-              style: TextStyle(
-                fontSize: 16,
+
+              // sub text
+              Text(
+                "Record of Detecting Neuro Tumors & Alzheimer ",
+                style: TextStyles.boldDarkMediumTextStyle().copyWith(
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.left,
+                softWrap: true,
               ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Medical History:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+
+              SizedBox(
+                height: 13.0.hp,
               ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Medical History details here...', // Replace with actual medical history
-              style: TextStyle(
-                fontSize: 16,
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 3.0.hp,
+                      ),
+                      CircleNavigator(
+                        onTap: () {},
+                        // onTap: () => Get.to(() => BrainTumorDetectionPage()),
+                        imageAssetPath: 'assets/images/medical.png',
+                        text: "BTD Test",
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'State:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+
+              // help, alzheimer detection option
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 3.5.hp,
+                      ),
+                      CircleNavigator(
+                        onTap: () {},
+                        // onTap: () => Get.to(() => AlzheimerDetectionPage()),
+                        imageAssetPath: 'assets/images/adp.png',
+                        text: "AD Test",
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Healthy', // Replace with actual state
-              style: TextStyle(
-                fontSize: 16,
+
+              const Spacer(),
+
+              Align(
+                alignment: Alignment.center,
+                child: ReusableButton(
+                  // onTap: () => homeController.navigateToLoginPage(),
+                  onTap: () async {
+                    FirebaseAuth auth = FirebaseAuth.instance;
+                    await auth.signOut();
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const OnBoarding()));
+                  },
+                  text: "Logout",
+                  color: const Color(0xff7c4c87),
+                  width: 60,
+                ),
               ),
-            ),
-          ],
+
+              SizedBox(
+                height: 1.5.hp,
+              ),
+            ],
+          ),
         ),
       ),
     );
