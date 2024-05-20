@@ -63,7 +63,7 @@ class AppRoutes {
     ),
     GetPage(
       name: ADMINLOGIN,
-      page: () => AdminPage(),
+      page: () => AdminLogin(),
     ),
   ];
 }

@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class AuthenticationController extends GetxController {
-
   TextEditingController adminloginEmailController = TextEditingController();
   TextEditingController adminloginPasswordController = TextEditingController();
-
 
   TextEditingController loginEmailController = TextEditingController();
   TextEditingController loginPasswordController = TextEditingController();
@@ -13,7 +11,6 @@ class AuthenticationController extends GetxController {
   TextEditingController signupNameController = TextEditingController();
   TextEditingController signupEmailController = TextEditingController();
   TextEditingController signupPasswordController = TextEditingController();
-
 
   // navigate to sign up page
   navigateToSignUpPage() {
@@ -35,6 +32,9 @@ class AuthenticationController extends GetxController {
   void dispose() {
     loginEmailController.dispose();
     loginPasswordController.dispose();
+
+    adminloginEmailController.dispose();
+    adminloginPasswordController.dispose();
 
     signupNameController.dispose();
     signupEmailController.dispose();

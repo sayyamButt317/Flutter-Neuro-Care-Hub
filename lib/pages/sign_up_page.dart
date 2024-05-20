@@ -100,7 +100,8 @@ class SignUpPage extends GetView<AuthenticationController> {
               MaterialButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    getxcontroller.signup(emailcontroller.text.toString(),passwordcontroller.text.toString());
+                    getxcontroller.signup(emailcontroller.text.toString(),
+                        passwordcontroller.text.toString());
                   }
                 },
                 height: 50,

@@ -17,20 +17,39 @@ class LoginController extends GetxController {
         email: email,
         password: password,
       );
-      Get.offAllNamed(AppRoutes.HOME);
-    } catch (error) {
-      // Show error snackbar
       Get.snackbar(
-        "Error",
-        "Failed to Login: $error",
+        "Success",
+        "Successfully Login",
         snackPosition: SnackPosition.BOTTOM,
+        duration: const Duration(seconds: 2),
         snackStyle: SnackStyle.FLOATING,
-        borderColor: Colors.red,
-        colorText: Colors.red,
+        backgroundColor: Colors.green,
+        colorText: Colors.lightGreen,
         titleText: const Text(
-          "Error",
-          style: TextStyle(color: Colors.white),
+          "Success",
+          style: TextStyle(color: Colors.lightGreen), // Custom title color
         ),
+      );
+      Get.offAllNamed(AppRoutes.HOME);
+    } on FirebaseAuthException catch (error) {
+      String errorMessage = 'An error occurred while logging in';
+      if (error.code == 'user-not-found') {
+        errorMessage = 'User not found';
+      } else if (error.code == 'wrong-password') {
+        errorMessage = 'Invalid password';
+      }
+
+      debugPrint(error.toString());
+
+      Get.snackbar(
+        'Error',
+        errorMessage,
+        backgroundColor: Colors.transparent,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(16),
+        colorText: Colors.red,
+        borderWidth: 1,
+        borderColor: Colors.red,
       );
     }
   }
@@ -41,20 +60,39 @@ class LoginController extends GetxController {
         email: email,
         password: password,
       );
-      Get.offAllNamed(AppRoutes.ADMINHOME);
-    } catch (error) {
-      // Show error snackbar
       Get.snackbar(
-        "Error",
-        "Failed to Login: $error",
+        "Success",
+        "Successfully Login",
         snackPosition: SnackPosition.BOTTOM,
+        duration: const Duration(seconds: 2),
         snackStyle: SnackStyle.FLOATING,
-        borderColor: Colors.red,
-        colorText: Colors.red,
+        backgroundColor: Colors.green,
+        colorText: Colors.lightGreen,
         titleText: const Text(
-          "Error",
-          style: TextStyle(color: Colors.white),
+          "Success",
+          style: TextStyle(color: Colors.lightGreen), // Custom title color
         ),
+      );
+      Get.offAllNamed(AppRoutes.ADMINHOME);
+    } on FirebaseAuthException catch (error) {
+      String errorMessage = 'An error occurred while logging in';
+      if (error.code == 'user-not-found') {
+        errorMessage = 'User not found';
+      } else if (error.code == 'wrong-password') {
+        errorMessage = 'Invalid password';
+      }
+
+      debugPrint(error.toString());
+
+      Get.snackbar(
+        'Error',
+        errorMessage,
+        backgroundColor: Colors.transparent,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(16),
+        colorText: Colors.red,
+        borderWidth: 1,
+        borderColor: Colors.red,
       );
     }
   }

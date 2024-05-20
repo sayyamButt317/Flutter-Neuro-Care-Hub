@@ -21,7 +21,6 @@ class LoginPage extends GetView<AuthenticationController> {
     return GetBuilder<AuthenticationController>(
       builder: (controller) {
         return Scaffold(
-
           resizeToAvoidBottomInset: false,
           extendBody: true,
           extendBodyBehindAppBar: true,
@@ -71,9 +70,10 @@ class LoginPage extends GetView<AuthenticationController> {
                           keyboardType: TextInputType.emailAddress,
                           obscureText: false,
                           onvalidation: (value) {
-                            return value!.isEmpty
-                                ? "Enter Your Email!"
-                                : null;
+                            if (value == null || value.isEmpty) {
+                              return "Enter Your Email!";
+                            }
+                            return null;
                           },
                         ),
 
@@ -89,9 +89,10 @@ class LoginPage extends GetView<AuthenticationController> {
                           keyboardType: TextInputType.text,
                           obscureText: true,
                           onvalidation: (value) {
-                            return value!.isEmpty
-                                ? "Enter Your Password!"
-                                : null;
+                            if (value == null || value.isEmpty) {
+                              return "Enter Your Password!";
+                            }
+                            return null;
                           },
                         ),
 

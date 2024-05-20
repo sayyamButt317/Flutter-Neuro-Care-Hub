@@ -48,7 +48,7 @@ class OnBoarding extends StatelessWidget {
             alignment: Alignment.center,
             child: ReusableButton(
               // onTap: () => homeController.navigateToLoginPage(),
-              onTap: () => Get.to(() => AdminPage()),
+              onTap: () => Get.to(() => AdminLogin()),
               text: "Login as Admin",
               color: const Color(0xff7c4c87),
               width: 60,

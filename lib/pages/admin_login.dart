@@ -7,8 +7,8 @@ import '../controllers/admin_controller.dart';
 import '../controllers/authentication_controller.dart';
 import '../controllers/login_controller.dart';
 
-class AdminPage extends GetView<AdminController> {
-  AdminPage({super.key});
+class AdminLogin extends GetView<AdminController> {
+  AdminLogin({super.key});
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailcontroller = TextEditingController();
@@ -62,7 +62,10 @@ class AdminPage extends GetView<AdminController> {
                           keyboardType: TextInputType.emailAddress,
                           obscureText: false,
                           onvalidation: (value) {
-                            return value!.isEmpty ? "Enter Your Email!" : null;
+                            if (value == null || value.isEmpty) {
+                              return "Enter Your Email!";
+                            }
+                            return null;
                           },
                         ),
                         SizedBox(height: 2.0.hp),
@@ -73,9 +76,10 @@ class AdminPage extends GetView<AdminController> {
                           keyboardType: TextInputType.text,
                           obscureText: true,
                           onvalidation: (value) {
-                            return value!.isEmpty
-                                ? "Enter Your Password!"
-                                : null;
+                            if (value == null || value.isEmpty) {
+                              return "Enter Your Password!";
+                            }
+                            return null;
                           },
                         ),
                         SizedBox(height: 5.0.hp),
