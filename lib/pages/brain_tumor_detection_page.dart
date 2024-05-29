@@ -151,7 +151,7 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
                 // Validate the form
                 if (_formKey.currentState!.validate()) {
                   getxcontroller.storeBrainUserInfo();
-                  Get.to(() => ImageUploadPage());
+
                 }
               },
               width: MediaQuery.of(context).size.width * 0.2,

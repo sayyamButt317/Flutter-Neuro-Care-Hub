@@ -14,6 +14,7 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
   AlzheimerDetectionPage({super.key});
   final _formKey = GlobalKey<FormState>();
   final AlzheimerController getxcontroller = Get.put(AlzheimerController());
+  final GenderController genderController = Get.put(GenderController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,7 +151,6 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
                 // Validate the form
                 if (_formKey.currentState!.validate()) {
                   getxcontroller.storeAlzUserInfo();
-                  Get.to(() => ImageUploadPage());
                 }
               },
               width: MediaQuery.of(context).size.width * 0.2,

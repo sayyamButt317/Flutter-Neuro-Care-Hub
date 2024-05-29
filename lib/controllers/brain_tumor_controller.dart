@@ -8,6 +8,9 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:neuro_care_hub_app/Model/usermodel.dart';
 
+import '../pages/image_upload.dart';
+
+
 class TumorController extends GetxController {
   final TextEditingController firstnamecontroller = TextEditingController();
   final TextEditingController lastnamecontroller = TextEditingController();
@@ -78,6 +81,7 @@ class TumorController extends GetxController {
           'gender': gender.value,
         },
       );
+      Get.to(() => ImageUploadPage());
     } catch (error) {
       Get.snackbar(
         'Error',

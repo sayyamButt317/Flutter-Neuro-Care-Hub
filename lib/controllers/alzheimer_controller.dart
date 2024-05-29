@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/Model/usermodel.dart';
 
+import '../pages/image_upload.dart';
+
 class AlzheimerController extends GetxController {
   final TextEditingController firstnamecontroller = TextEditingController();
   final TextEditingController lastnamecontroller = TextEditingController();
@@ -11,9 +13,9 @@ class AlzheimerController extends GetxController {
   final TextEditingController addresscontroller = TextEditingController();
   final TextEditingController citycontroller = TextEditingController();
   final TextEditingController statecontroller = TextEditingController();
-  final TextEditingController gendercontroller = TextEditingController();
-  RxList<UserModel> allUsers = RxList<UserModel>();
 
+  RxList<UserModel> allUsers = RxList<UserModel>();
+  RxString gender = "".obs;
   Future<void> storeAlzUserInfo() async {
     try {
       final uid = FirebaseAuth.instance.currentUser!.uid;
@@ -29,9 +31,10 @@ class AlzheimerController extends GetxController {
           'city': citycontroller.text,
           'disease': diseasecontroller.text,
           'state': statecontroller.text,
-          'gender': gendercontroller.value,
+          'gender': gender.value,
         },
       );
+      Get.to(() => ImageUploadPage());
     } catch (error) {
       Get.snackbar(
         'Error',
