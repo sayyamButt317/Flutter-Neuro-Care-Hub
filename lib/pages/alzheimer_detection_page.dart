@@ -11,15 +11,14 @@ import '../utils/widgets/reusable widgets/text_form_field.dart';
 import 'image_upload.dart';
 
 class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
-   AlzheimerDetectionPage({super.key});
+  AlzheimerDetectionPage({super.key});
   final _formKey = GlobalKey<FormState>();
-   final TumorController getxcontroller = Get.put(TumorController());
-   final GenderController genderController = Get.put(GenderController());
+  final AlzheimerController getxcontroller = Get.put(AlzheimerController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical:50.0,horizontal: 8),
+        padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 8),
         child: ListView(
           children: [
             Text(
@@ -63,7 +62,8 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
                           ),
                         ),
                         const SizedBox(
-                          width: 10, // Adjust the width between the fields as needed
+                          width:
+                              10, // Adjust the width between the fields as needed
                         ),
                         Expanded(
                           child: ReusableTextFormField(
@@ -78,9 +78,9 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
                           ),
                         ),
                         const SizedBox(
-                          width: 10, // Adjust the width between the fields as needed
+                          width:
+                              10, // Adjust the width between the fields as needed
                         ),
-
                       ],
                     ),
                     SizedBox(height: 2.0.hp),
@@ -96,8 +96,6 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
                       },
                     ),
                     SizedBox(height: 2.0.hp),
-
-
                     ReusableTextFormField(
                       controller: getxcontroller.addresscontroller,
                       hintText: 'Address',
@@ -124,7 +122,8 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
                           ),
                         ),
                         const SizedBox(
-                          width: 10, // Adjust the width between the fields as needed
+                          width:
+                              10, // Adjust the width between the fields as needed
                         ),
                         Expanded(
                           child: ReusableTextFormField(
@@ -150,9 +149,7 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
               onTap: () {
                 // Validate the form
                 if (_formKey.currentState!.validate()) {
-                  getxcontroller.storeUserInfo(
-
-                  );
+                  getxcontroller.storeAlzUserInfo();
                   Get.to(() => ImageUploadPage());
                 }
               },
@@ -166,5 +163,4 @@ class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
       ),
     );
   }
-
 }

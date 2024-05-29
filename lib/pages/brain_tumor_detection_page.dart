@@ -20,7 +20,7 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical:50.0,horizontal: 8),
+        padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 8),
         child: ListView(
           children: [
             Text(
@@ -63,7 +63,8 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
                           ),
                         ),
                         const SizedBox(
-                          width: 10, // Adjust the width between the fields as needed
+                          width:
+                              10, // Adjust the width between the fields as needed
                         ),
                         Expanded(
                           child: ReusableTextFormField(
@@ -78,13 +79,13 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
                           ),
                         ),
                         const SizedBox(
-                          width: 10, // Adjust the width between the fields as needed
+                          width:
+                              10, // Adjust the width between the fields as needed
                         ),
-
                       ],
                     ),
                     SizedBox(height: 2.0.hp),
-                 const GenderRadioButton(),
+                    const GenderRadioButton(),
                     ReusableTextFormField(
                       controller: getxcontroller.diseasecontroller,
                       hintText: 'Medical History',
@@ -96,8 +97,6 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
                       },
                     ),
                     SizedBox(height: 2.0.hp),
-
-
                     ReusableTextFormField(
                       controller: getxcontroller.addresscontroller,
                       hintText: 'Address',
@@ -124,7 +123,8 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
                           ),
                         ),
                         const SizedBox(
-                          width: 10, // Adjust the width between the fields as needed
+                          width:
+                              10, // Adjust the width between the fields as needed
                         ),
                         Expanded(
                           child: ReusableTextFormField(
@@ -150,9 +150,7 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
               onTap: () {
                 // Validate the form
                 if (_formKey.currentState!.validate()) {
-                  getxcontroller.storeUserInfo(
-
-                  );
+                  getxcontroller.storeBrainUserInfo();
                   Get.to(() => ImageUploadPage());
                 }
               },

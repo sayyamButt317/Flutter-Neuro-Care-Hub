@@ -60,11 +60,14 @@ class TumorController extends GetxController {
     return imageUrl;
   }
 
-  Future<void> storeUserInfo() async {
+  Future<void> storeBrainUserInfo() async {
     try {
       final uid = FirebaseAuth.instance.currentUser!.uid;
 
-      await FirebaseFirestore.instance.collection('patient_info').doc(uid).set(
+      await FirebaseFirestore.instance
+          .collection('Brainpatient_info')
+          .doc(uid)
+          .set(
         {
           'firstname': firstnamecontroller.text,
           'lastname': lastnamecontroller.text,
@@ -89,45 +92,41 @@ class TumorController extends GetxController {
     }
   }
 
+  Future<void> getBrainUserInfo() async {
+    // Get the current user's ID
+    final uid = FirebaseAuth.instance.currentUser!.uid;
 
-  // Future<void> getuserinfo() async {
-  //   final uid = FirebaseAuth.instance.currentUser!.uid;
-  //   FirebaseFirestore.instance
-  //       .collection('patient_info')
-  //       .doc(uid)
-  //       .snapshots()
-  //       .listen((event) {
-  //     // Explicitly cast the result to Map<String, dynamic>
-  //     final Map<String, dynamic> userData = event.data() as Map<String, dynamic>;
-  //     myuser.value = UserModel.fromJson(userData);
-  //     imageUrl.value = myuser.value.image ?? '';
-  //     firstnamecontroller.text = myuser.value.name ?? '';
-  //     lastnamecontroller.text = myuser.value.lastname ?? '';
-  //     diseasecontroller.text = myuser.value.disease ?? '';
-  //     addresscontroller.text = myuser.value.address ?? '';
-  //     citycontroller.text = myuser.value.city ?? '';
-  //     statecontroller.text = myuser.value.state ?? '';
-  //     gender.value = myuser.value.gender ?? '';
-  //   });
-  // }
-  Future<void> getuserinfo() async {
-    FirebaseFirestore.instance
-        .collection('patient_info')
-        .get()
-        .then((QuerySnapshot<Map<String, dynamic>> snapshot) {
-      if (snapshot.docs.isNotEmpty) {
-        // Iterate through each document in the collection
-        snapshot.docs.forEach((DocumentSnapshot<Map<String, dynamic>> doc) {
-          // Check if the data is not null
-          if (doc.data() != null) {
-            // Convert each document to a UserModel object
-            UserModel user = UserModel.fromJson(doc.data()!);
-            // Add the user to a list or perform any other operation as needed
-            allUsers.add(user);
-          }
-        });
+    // Try-catch for error handling
+    try {
+      // Fetch the document from Firestore
+      final docSnapshot = await FirebaseFirestore.instance
+          .collection('Brainpatient_info')
+          .doc(uid)
+          .get();
+
+      // Check if document exists
+      if (docSnapshot.exists) {
+        final Map<String, dynamic> userData =
+            docSnapshot.data() as Map<String, dynamic>;
+        final user = UserModel.fromJson(userData);
+
+        // Update UI elements
+        myuser.value = user;
+        imageUrl.value = user.image ?? '';
+        firstnamecontroller.text = user.name ?? '';
+        lastnamecontroller.text = user.lastname ?? '';
+        diseasecontroller.text = user.disease ?? '';
+        addresscontroller.text = user.address ?? '';
+        citycontroller.text = user.city ?? '';
+        statecontroller.text = user.state ?? '';
+        gender.value = user.gender ?? '';
+      } else {
+        // Handle case where document doesn't exist
+        print("Document does not exist for uid: $uid");
       }
-    });
+    } catch (error) {
+      // Handle potential errors during Firestore operation
+      print("Error getting user info: $error");
+    }
   }
-
 }
