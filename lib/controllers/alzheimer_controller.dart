@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/Model/usermodel.dart';
 
-import '../pages/image_upload.dart';
+import '../pages/User/image_upload.dart';
 
 class AlzheimerController extends GetxController {
   final TextEditingController firstnamecontroller = TextEditingController();
@@ -49,23 +49,24 @@ class AlzheimerController extends GetxController {
     }
   }
 
-  Future<void> getAlzuserinfo() async {
-    FirebaseFirestore.instance
-        .collection('patient_info')
-        .get()
-        .then((QuerySnapshot<Map<String, dynamic>> snapshot) {
-      if (snapshot.docs.isNotEmpty) {
-        // Iterate through each document in the collection
-        snapshot.docs.forEach((DocumentSnapshot<Map<String, dynamic>> doc) {
-          // Check if the data is not null
-          if (doc.data() != null) {
-            // Convert each document to a UserModel object
-            UserModel user = UserModel.fromJson(doc.data()!);
-            // Add the user to a list or perform any other operation as needed
-            allUsers.add(user);
-          }
-        });
+  Future<void> getBrainUserInfo() async {
+    // Get a reference to the collection
+    final collection = FirebaseFirestore.instance.collection('Alzpatient_info');
+
+    try {
+      // Get all documents in the collection
+      final querySnapshot = await collection.get();
+
+      // Clear existing data in allUsers
+      allUsers.clear();
+
+      // Add each user data to allUsers
+      for (var doc in querySnapshot.docs) {
+        final user = UserModel.fromJson(doc.data());
+        allUsers.add(user);
       }
-    });
+    } catch (error) {
+      print("Error getting user info: $error");
+    }
   }
 }

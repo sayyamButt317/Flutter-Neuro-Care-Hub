@@ -8,8 +8,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:neuro_care_hub_app/Model/usermodel.dart';
 
-import '../pages/image_upload.dart';
-
+import '../pages/User/image_upload.dart';
 
 class TumorController extends GetxController {
   final TextEditingController firstnamecontroller = TextEditingController();
@@ -97,39 +96,23 @@ class TumorController extends GetxController {
   }
 
   Future<void> getBrainUserInfo() async {
-    // Get the current user's ID
-    final uid = FirebaseAuth.instance.currentUser!.uid;
+    // Get a reference to the collection
+    final collection =
+        FirebaseFirestore.instance.collection('Brainpatient_info');
 
-    // Try-catch for error handling
     try {
-      // Fetch the document from Firestore
-      final docSnapshot = await FirebaseFirestore.instance
-          .collection('Brainpatient_info')
-          .doc(uid)
-          .get();
+      // Get all documents in the collection
+      final querySnapshot = await collection.get();
 
-      // Check if document exists
-      if (docSnapshot.exists) {
-        final Map<String, dynamic> userData =
-            docSnapshot.data() as Map<String, dynamic>;
-        final user = UserModel.fromJson(userData);
+      // Clear existing data in allUsers
+      allUsers.clear();
 
-        // Update UI elements
-        myuser.value = user;
-        imageUrl.value = user.image ?? '';
-        firstnamecontroller.text = user.name ?? '';
-        lastnamecontroller.text = user.lastname ?? '';
-        diseasecontroller.text = user.disease ?? '';
-        addresscontroller.text = user.address ?? '';
-        citycontroller.text = user.city ?? '';
-        statecontroller.text = user.state ?? '';
-        gender.value = user.gender ?? '';
-      } else {
-        // Handle case where document doesn't exist
-        print("Document does not exist for uid: $uid");
+      // Add each user data to allUsers
+      for (var doc in querySnapshot.docs) {
+        final user = UserModel.fromJson(doc.data());
+        allUsers.add(user);
       }
     } catch (error) {
-      // Handle potential errors during Firestore operation
       print("Error getting user info: $error");
     }
   }

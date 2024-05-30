@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:neuro_care_hub_app/controllers/admin_home_controller.dart';
 import 'package:neuro_care_hub_app/pages/Authentication/login_page.dart';
 import 'package:neuro_care_hub_app/routes/routes.dart';
@@ -95,7 +94,7 @@ class AdminHome extends GetView<AdminHomeController> {
                         height: 3.5.hp,
                       ),
                       CircleNavigator(
-                        onTap: () => controller.navigateToADPage(),
+                        onTap: () => Get.to(AppRoutes.ADMINALZDATA),
                         imageAssetPath: 'assets/images/adp.png',
                         text: "AD Test",
                       ),
