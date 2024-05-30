@@ -14,6 +14,11 @@ class AlzheimerController extends GetxController {
   final TextEditingController citycontroller = TextEditingController();
   final TextEditingController statecontroller = TextEditingController();
 
+ void setIsProfileLoading(bool isLoading) {
+    isProfileLoading.value = isLoading;
+  }
+
+  RxBool isProfileLoading = false.obs;
   RxList<UserModel> allUsers = RxList<UserModel>();
   RxString gender = "".obs;
   Future<void> storeAlzUserInfo() async {
@@ -49,7 +54,7 @@ class AlzheimerController extends GetxController {
     }
   }
 
-  Future<void> getBrainUserInfo() async {
+  Future<void> getAlzInfo() async {
     // Get a reference to the collection
     final collection = FirebaseFirestore.instance.collection('Alzpatient_info');
 

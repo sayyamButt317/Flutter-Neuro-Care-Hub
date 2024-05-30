@@ -2,8 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/controllers/admin_home_controller.dart';
+import 'package:neuro_care_hub_app/pages/Admin/admin_alzdata_page.dart';
+import 'package:neuro_care_hub_app/pages/Admin/admin_braindata_page.dart';
 import 'package:neuro_care_hub_app/pages/Authentication/login_page.dart';
-import 'package:neuro_care_hub_app/routes/routes.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/styles/text_styles.dart';
 import 'package:neuro_care_hub_app/utils/widgets/home%20page/circle_navigator.dart';
@@ -71,7 +72,7 @@ class AdminHome extends GetView<AdminHomeController> {
                         height: 3.0.hp,
                       ),
                       CircleNavigator(
-                        onTap: () => Get.to(AppRoutes.ADMINBRNDATA),
+                        onTap: () => Get.to(() => const AdminBrainDataScreen()),
                         imageAssetPath: 'assets/images/medical.png',
                         text: "BTD Test",
                       ),
@@ -94,7 +95,7 @@ class AdminHome extends GetView<AdminHomeController> {
                         height: 3.5.hp,
                       ),
                       CircleNavigator(
-                        onTap: () => Get.to(AppRoutes.ADMINALZDATA),
+                        onTap: () => Get.to(()=> const AdminAlzDataScreen()),
                         imageAssetPath: 'assets/images/adp.png',
                         text: "AD Test",
                       ),

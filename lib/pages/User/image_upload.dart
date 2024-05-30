@@ -77,7 +77,7 @@ class ImageUploadPage extends GetView<TumorController> {
           // Predict button for brain tumor
           ReusableButton(
             onTap: () async {
-              getxcontroller.isprofileloading(true);
+              getxcontroller.isProfileLoading(true);
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
@@ -93,7 +93,7 @@ class ImageUploadPage extends GetView<TumorController> {
                   ],
                 ),
               );
-              getxcontroller.isprofileloading(false);
+              getxcontroller.isProfileLoading(false);
             },
             width: MediaQuery.of(context).size.width * 0.2,
             text: "Predict ",

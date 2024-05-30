@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:neuro_care_hub_app/pages/Admin/admin_alzdata_page.dart';
 import 'package:neuro_care_hub_app/pages/Admin/admin_home.dart';
 import 'package:neuro_care_hub_app/pages/User/about_page.dart';
 import 'package:neuro_care_hub_app/pages/Admin/admin_login.dart';
@@ -25,6 +26,7 @@ class AppRoutes {
   static const ADMINHOME = '/adminhome';
   static const ADMINLOGIN = '/adminlogin';
   static const ADMINBRNDATA = '/adminbraindata';
+  static const ADMINALZDATA = '/adminalzdata';
 
   static final routes = [
     GetPage(
@@ -67,6 +69,13 @@ class AppRoutes {
       name: ADMINLOGIN,
       page: () => AdminLogin(),
     ),
-    GetPage(name: ADMINBRNDATA, page: () => const AdminBrainDataScreen()),
+    GetPage(
+      name: ADMINBRNDATA, 
+      page: () => const AdminBrainDataScreen(),
+      ),
+    GetPage(
+      name: ADMINALZDATA, 
+      page: () => const AdminAlzDataScreen(),
+      ),
   ];
 }

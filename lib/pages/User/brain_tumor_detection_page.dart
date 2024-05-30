@@ -89,7 +89,7 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
                       controller: getxcontroller.diseasecontroller,
                       hintText: 'Medical History',
                       icon: Icons.sick_rounded,
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.name,
                       obscureText: false,
                       onvalidation: (value) {
                         return value!.isEmpty ? "Enter Your Disease!" : null;

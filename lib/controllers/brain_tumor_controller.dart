@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:neuro_care_hub_app/Model/usermodel.dart';
 
-import '../pages/User/image_upload.dart';
+import '../pages/User/image_upload.dart'; 
 
 class TumorController extends GetxController {
   final TextEditingController firstnamecontroller = TextEditingController();
@@ -18,9 +18,10 @@ class TumorController extends GetxController {
   final TextEditingController citycontroller = TextEditingController();
   final TextEditingController statecontroller = TextEditingController();
   RxList<UserModel> allUsers = RxList<UserModel>();
-  var isprofileloading = false.obs;
+  var isProfileLoading = false.obs;
+
   void setIsProfileLoading(bool isLoading) {
-    isprofileloading.value = isLoading;
+    isProfileLoading.value = isLoading;
   }
 
   RxString gender = "".obs;
@@ -31,12 +32,12 @@ class TumorController extends GetxController {
 
   File? selectedImage;
 
-  Future<void> getImage(ImageSource camera) async {
+  Future<void> getImage(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
     final image = await picker.pickImage(
       maxWidth: 150,
       maxHeight: 200,
-      source: ImageSource.gallery,
+      source: source,
     );
     if (image != null) {
       imagePath.value = image.path.toString();
@@ -44,22 +45,18 @@ class TumorController extends GetxController {
   }
 
   Future<String> uploadImage(File? image) async {
-    if (image == null) {
-      return '';
-    }
+    if (image == null) return '';
 
-    String imageUrl = '';
     try {
       String fileName = Path.basename(image.path);
       var reference =
           FirebaseStorage.instance.ref().child('diseaseimage/$fileName');
       TaskSnapshot taskSnapshot = await reference.putFile(image);
-      imageUrl = await taskSnapshot.ref.getDownloadURL();
-      debugPrint("Download URL: $imageUrl");
+      return await taskSnapshot.ref.getDownloadURL();
     } catch (error) {
       debugPrint("Image Upload Error: $error");
+      return '';
     }
-    return imageUrl;
   }
 
   Future<void> storeBrainUserInfo() async {
@@ -69,22 +66,20 @@ class TumorController extends GetxController {
       await FirebaseFirestore.instance
           .collection('Brainpatient_info')
           .doc(uid)
-          .set(
-        {
-          'firstname': firstnamecontroller.text,
-          'lastname': lastnamecontroller.text,
-          'address': addresscontroller.text,
-          'city': citycontroller.text,
-          'disease': diseasecontroller.text,
-          'state': statecontroller.text,
-          'gender': gender.value,
-        },
-      );
+          .set({
+        'firstname': firstnamecontroller.text,
+        'lastname': lastnamecontroller.text,
+        'address': addresscontroller.text,
+        'city': citycontroller.text,
+        'disease': diseasecontroller.text,
+        'state': statecontroller.text,
+        'gender': gender.value,
+      });
       Get.to(() => ImageUploadPage());
     } catch (error) {
       Get.snackbar(
         'Error',
-        "There was an error Getting your Record.",
+        "There was an error storing your record.",
         backgroundColor: Colors.transparent,
         snackPosition: SnackPosition.BOTTOM,
         margin: const EdgeInsets.all(16),
@@ -96,20 +91,14 @@ class TumorController extends GetxController {
   }
 
   Future<void> getBrainUserInfo() async {
-    // Get a reference to the collection
-    final collection =
-        FirebaseFirestore.instance.collection('Brainpatient_info');
+    final collection = FirebaseFirestore.instance.collection('Brainpatient_info');
 
     try {
-      // Get all documents in the collection
       final querySnapshot = await collection.get();
-
-      // Clear existing data in allUsers
       allUsers.clear();
 
-      // Add each user data to allUsers
       for (var doc in querySnapshot.docs) {
-        final user = UserModel.fromJson(doc.data());
+        final user = UserModel.fromJson(doc.data() as Map<String, dynamic>);
         allUsers.add(user);
       }
     } catch (error) {
@@ -117,3 +106,4 @@ class TumorController extends GetxController {
     }
   }
 }
+

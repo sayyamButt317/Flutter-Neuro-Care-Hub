@@ -22,18 +22,14 @@ class _AdminScreenState extends State<AdminBrainDataScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Admin Screen'),
+        centerTitle: true,
+        title: const Text(' Tumor Record'),
       ),
       body: Obx(
         () {
           if (getxcontroller.isProfileLoading.value) {
             return const Center(child: CircularProgressIndicator());
           }
-
-          if (getxcontroller.allUsers.isEmpty) {
-            return const Center(child: Text('No users found.'));
-          }
-
           return ListView.builder(
             itemCount: getxcontroller.allUsers.length,
             itemBuilder: (context, index) {
@@ -42,7 +38,7 @@ class _AdminScreenState extends State<AdminBrainDataScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
                   child: ListTile(
-                    title: Text('${user.name ?? ''} ${user.lastname ?? ''}'),
+                    title: Text('User Name :${user.name ?? ''} ${user.lastname ?? ''}'),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -50,7 +46,7 @@ class _AdminScreenState extends State<AdminBrainDataScreen> {
                         Text('Address: ${user.address ?? ''}'),
                         Text('City: ${user.city ?? ''}'),
                         Text('State: ${user.state ?? ''}'),
-                        Text('Gender: ${user.gender ?? ''}'),
+                        // Text('Gender: ${user.gender ?? ''}'),
                       ],
                     ),
                   ),
