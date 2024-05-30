@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_button.dart';
-import 'admin_login.dart';
-import 'login_page.dart';
+import '../Admin/admin_login.dart';
+import '../Authentication/login_page.dart';
 
 class OnBoarding extends StatelessWidget {
   const OnBoarding({super.key});

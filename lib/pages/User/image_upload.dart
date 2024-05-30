@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,7 +8,8 @@ import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_but
 class ImageUploadPage extends GetView<TumorController> {
   ImageUploadPage({super.key});
 
-  final TumorController getxcontroller = Get.put<TumorController>(TumorController());
+  final TumorController getxcontroller =
+      Get.put<TumorController>(TumorController());
 
   @override
   Widget build(BuildContext context) {
@@ -42,28 +42,29 @@ class ImageUploadPage extends GetView<TumorController> {
                       color: Colors.grey,
                       image: getxcontroller.selectedImage == null
                           ? getxcontroller.myuser.value.image != null &&
-                          getxcontroller.myuser.value.image!.isNotEmpty
-                          ? DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(getxcontroller.myuser.value.image!),
-                      )
-                          : null
+                                  getxcontroller.myuser.value.image!.isNotEmpty
+                              ? DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                      getxcontroller.myuser.value.image!),
+                                )
+                              : null
                           : DecorationImage(
-                        fit: BoxFit.cover,
-                        image: FileImage(getxcontroller.selectedImage!),
-                      ),
+                              fit: BoxFit.cover,
+                              image: FileImage(getxcontroller.selectedImage!),
+                            ),
                     ),
                     child: getxcontroller.selectedImage == null
                         ? getxcontroller.myuser.value.image != null &&
-                        getxcontroller.myuser.value.image!.isNotEmpty
-                        ? Container()
-                        : const Center(
-                      child: Icon(
-                        Icons.camera_alt_outlined,
-                        size: 40,
-                        color: Colors.white,
-                      ),
-                    )
+                                getxcontroller.myuser.value.image!.isNotEmpty
+                            ? Container()
+                            : const Center(
+                                child: Icon(
+                                  Icons.camera_alt_outlined,
+                                  size: 40,
+                                  color: Colors.white,
+                                ),
+                              )
                         : null,
                   ),
                 ),

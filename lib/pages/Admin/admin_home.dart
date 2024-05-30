@@ -1,19 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:neuro_care_hub_app/controllers/home_controller.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:neuro_care_hub_app/controllers/admin_home_controller.dart';
+import 'package:neuro_care_hub_app/pages/Authentication/login_page.dart';
+import 'package:neuro_care_hub_app/routes/routes.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/styles/text_styles.dart';
+import 'package:neuro_care_hub_app/utils/widgets/home%20page/circle_navigator.dart';
 import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_button.dart';
 
-import '../utils/widgets/home page/circle_navigator.dart';
-import 'about_page.dart';
-import 'alzheimer_detection_page.dart';
-import 'brain_tumor_detection_page.dart';
-import 'login_page.dart';
-
-class HomePage extends GetView<HomeController> {
-  const HomePage({super.key});
+class AdminHome extends GetView<AdminHomeController> {
+  const AdminHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +63,6 @@ class HomePage extends GetView<HomeController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleNavigator(
-                    onTap: () => Get.to(() => const AboutPage()),
-                    imageAssetPath: 'assets/images/faq.png',
-                    text: "About",
-                  ),
                   SizedBox(
                     width: 5.0.wp,
                   ),
@@ -79,7 +72,7 @@ class HomePage extends GetView<HomeController> {
                         height: 3.0.hp,
                       ),
                       CircleNavigator(
-                        onTap: () => Get.to(() => BrainTumorDetectionPage()),
+                        onTap: () => Get.to(AppRoutes.ADMINBRNDATA),
                         imageAssetPath: 'assets/images/medical.png',
                         text: "BTD Test",
                       ),
@@ -93,11 +86,6 @@ class HomePage extends GetView<HomeController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleNavigator(
-                    onTap: () => controller.navigateToHelpPage(),
-                    imageAssetPath: 'assets/images/help.png',
-                    text: "Help",
-                  ),
                   SizedBox(
                     width: 10.0.wp,
                   ),

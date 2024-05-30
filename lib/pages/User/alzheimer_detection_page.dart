@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:neuro_care_hub_app/controllers/brain_tumor_controller.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_button.dart';
-import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/text_form_field.dart';
 
-import '../utils/styles/text_styles.dart';
-import '../utils/widgets/RadioButton/radio_button.dart';
-import 'image_upload.dart';
+import '../../controllers/alzheimer_controller.dart';
+import '../../utils/styles/text_styles.dart';
+import '../../utils/widgets/RadioButton/radio_button.dart';
+import '../../utils/widgets/reusable widgets/text_form_field.dart';
 
-class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
-  BrainTumorDetectionPage({super.key});
-
+class AlzheimerDetectionPage extends GetView<AlzheimerDetectionPage> {
+  AlzheimerDetectionPage({super.key});
   final _formKey = GlobalKey<FormState>();
-  final TumorController getxcontroller = Get.put(TumorController());
+  final AlzheimerController getxcontroller = Get.put(AlzheimerController());
   final GenderController genderController = Get.put(GenderController());
   @override
   Widget build(BuildContext context) {
@@ -34,13 +31,14 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
             ),
             SizedBox(height: 3.0.hp),
             Text(
-              "Submit Your Form for Detecting Neuro Tumors Using Advanced AI",
+              "Submit Your Form for Detecting Alzheimer Tumors Using Advanced AI",
               style: TextStyles.boldDarkSmallTextStyle().copyWith(
                 color: Colors.black,
               ),
               textAlign: TextAlign.left,
               softWrap: true,
             ),
+            SizedBox(height: 3.0.hp),
             SizedBox(height: 3.0.hp),
             Form(
               key: _formKey,
@@ -150,8 +148,7 @@ class BrainTumorDetectionPage extends GetView<BrainTumorDetectionPage> {
               onTap: () {
                 // Validate the form
                 if (_formKey.currentState!.validate()) {
-                  getxcontroller.storeBrainUserInfo();
-
+                  getxcontroller.storeAlzUserInfo();
                 }
               },
               width: MediaQuery.of(context).size.width * 0.2,

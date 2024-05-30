@@ -1,15 +1,16 @@
 import 'package:get/get.dart';
-import 'package:neuro_care_hub_app/pages/about_page.dart';
-import 'package:neuro_care_hub_app/pages/admin_login.dart';
-import 'package:neuro_care_hub_app/pages/admin_page.dart';
-import 'package:neuro_care_hub_app/pages/alzheimer_detection_page.dart';
-import 'package:neuro_care_hub_app/pages/contact_us_page.dart';
-import 'package:neuro_care_hub_app/pages/home_page.dart';
-import 'package:neuro_care_hub_app/pages/sign_up_page.dart';
-import 'package:neuro_care_hub_app/pages/splash_page.dart';
-import 'package:neuro_care_hub_app/pages/brain_tumor_detection_page.dart';
+import 'package:neuro_care_hub_app/pages/Admin/admin_home.dart';
+import 'package:neuro_care_hub_app/pages/User/about_page.dart';
+import 'package:neuro_care_hub_app/pages/Admin/admin_login.dart';
+import 'package:neuro_care_hub_app/pages/Admin/admin_braindata_page.dart';
+import 'package:neuro_care_hub_app/pages/User/alzheimer_detection_page.dart';
+import 'package:neuro_care_hub_app/pages/User/contact_us_page.dart';
+import 'package:neuro_care_hub_app/pages/User/home_page.dart';
+import 'package:neuro_care_hub_app/pages/Authentication/sign_up_page.dart';
+import 'package:neuro_care_hub_app/pages/User/splash_page.dart';
+import 'package:neuro_care_hub_app/pages/User/brain_tumor_detection_page.dart';
 
-import '../pages/login_page.dart';
+import '../pages/Authentication/login_page.dart';
 
 class AppRoutes {
   static const INITIAL = '/';
@@ -23,6 +24,7 @@ class AppRoutes {
   static const PROFILE = '/profile';
   static const ADMINHOME = '/adminhome';
   static const ADMINLOGIN = '/adminlogin';
+  static const ADMINBRNDATA = '/adminbraindata';
 
   static final routes = [
     GetPage(
@@ -59,11 +61,12 @@ class AppRoutes {
     ),
     GetPage(
       name: ADMINHOME,
-      page: () => const AdminScreen(),
+      page: () => const AdminHome(),
     ),
     GetPage(
       name: ADMINLOGIN,
       page: () => AdminLogin(),
     ),
+    GetPage(name: ADMINBRNDATA, page: () => const AdminBrainDataScreen()),
   ];
 }

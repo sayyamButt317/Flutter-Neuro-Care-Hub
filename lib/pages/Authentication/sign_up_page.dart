@@ -6,8 +6,8 @@ import 'package:neuro_care_hub_app/controllers/signup_controller.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/styles/text_styles.dart';
 
-import '../utils/widgets/authentication pages/switch_authentication_page_row.dart';
-import '../utils/widgets/reusable widgets/text_form_field.dart';
+import '../../utils/widgets/authentication pages/switch_authentication_page_row.dart';
+import '../../utils/widgets/reusable widgets/text_form_field.dart';
 
 class SignUpPage extends GetView<AuthenticationController> {
   SignUpPage({super.key});

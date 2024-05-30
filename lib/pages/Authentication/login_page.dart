@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/controllers/authentication_controller.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/styles/text_styles.dart';
-import '../controllers/login_controller.dart';
-import '../utils/widgets/authentication pages/switch_authentication_page_row.dart';
-import '../utils/widgets/reusable widgets/text_form_field.dart';
+import '../../controllers/login_controller.dart';
+import '../../utils/widgets/authentication pages/switch_authentication_page_row.dart';
+import '../../utils/widgets/reusable widgets/text_form_field.dart';
 import 'forget_password.dart';
 
 class LoginPage extends GetView<AuthenticationController> {

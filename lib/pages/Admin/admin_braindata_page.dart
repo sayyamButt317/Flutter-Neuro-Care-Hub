@@ -1,21 +1,19 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/controllers/brain_tumor_controller.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_button.dart';
-import '../Model/usermodel.dart';
-import 'onboarding_page.dart';
+import '../User/onboarding_page.dart';
 
-class AdminScreen extends StatefulWidget {
-  const AdminScreen({super.key});
+class AdminBrainDataScreen extends StatefulWidget {
+  const AdminBrainDataScreen({super.key});
 
   @override
-  State<AdminScreen> createState() => _AdminScreenState();
+  State<AdminBrainDataScreen> createState() => _AdminScreenState();
 }
 
-class _AdminScreenState extends State<AdminScreen> {
+class _AdminScreenState extends State<AdminBrainDataScreen> {
   final TumorController getxcontroller = Get.put(TumorController());
 
   @override

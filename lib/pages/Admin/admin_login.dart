@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/styles/text_styles.dart';
 import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/text_form_field.dart';
-import '../controllers/admin_controller.dart';
-import '../controllers/authentication_controller.dart';
-import '../controllers/login_controller.dart';
+import '../../controllers/admin_controller.dart';
+import '../../controllers/authentication_controller.dart';
+import '../../controllers/login_controller.dart';
 
 class AdminLogin extends GetView<AdminController> {
   AdminLogin({super.key});
