@@ -44,6 +44,9 @@ dependencies:
   flutter_native_splash:
   get: ^4.6.6
   google_fonts:
+  tflite_flutter: ^0.10.4
+  tflite_flutter_helper_plus: ^0.0.2
+  tflite: ^1.1.2
 #  flutter_native_splash: ^2.4.0
 
 dev_dependencies:

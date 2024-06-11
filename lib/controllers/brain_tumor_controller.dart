@@ -29,8 +29,10 @@ class TumorController extends GetxController {
 
   RxString imageUrl = RxString('');
   RxString imagePath = ''.obs;
-
   File? selectedImage;
+
+
+
 
   Future<void> getImage(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
@@ -98,7 +100,7 @@ class TumorController extends GetxController {
       allUsers.clear();
 
       for (var doc in querySnapshot.docs) {
-        final user = UserModel.fromJson(doc.data() as Map<String, dynamic>);
+        final user = UserModel.fromJson(doc.data());
         allUsers.add(user);
       }
     } catch (error) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:neuro_care_hub_app/controllers/brain_tumor_controller.dart';
+import 'package:neuro_care_hub_app/controllers/image_controllers.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_button.dart';
 
@@ -10,7 +11,8 @@ class ImageUploadPage extends GetView<TumorController> {
 
   final TumorController getxcontroller =
       Get.put<TumorController>(TumorController());
-
+  final BrainTumorImageDetector imagecontroller =
+      Get.put<BrainTumorImageDetector>(BrainTumorImageDetector());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,27 +79,45 @@ class ImageUploadPage extends GetView<TumorController> {
           // Predict button for brain tumor
           ReusableButton(
             onTap: () async {
-              getxcontroller.isProfileLoading(true);
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text('Brain Tumor Prediction'),
-                  // content: Text(result),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('OK'),
-                    ),
-                  ],
-                ),
-              );
-              getxcontroller.isProfileLoading(false);
+              if (getxcontroller.selectedImage != null) {
+                getxcontroller.isProfileLoading(true);
+                Map<String, dynamic> result = await imagecontroller
+                    .predict(getxcontroller.selectedImage!.path);
+
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Brain Tumor Prediction'),
+                    content: Text(result as String),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+
+                getxcontroller.isProfileLoading(false);
+              } else {
+                // Handle case where no image is selected
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('No Image Selected'),
+                    content: const Text('Please select an image first.'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+              }
             },
-            width: MediaQuery.of(context).size.width * 0.2,
-            text: "Predict ",
-            color: const Color(0xff664f9e),
+            text: 'predict',
+            // ... other button properties
           ),
         ],
       ),
