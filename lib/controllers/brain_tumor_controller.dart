@@ -44,10 +44,12 @@ class TumorController extends GetxController {
     if (image != null) {
       imagePath.value = image.path.toString();
     }
+    
   }
 
   Future<String> uploadImage(File? image) async {
     if (image == null) return '';
+     
 
     try {
       String fileName = Path.basename(image.path);

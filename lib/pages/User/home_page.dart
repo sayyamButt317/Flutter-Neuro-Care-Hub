@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neuro_care_hub_app/controllers/home_controller.dart';
+import 'package:neuro_care_hub_app/pages/User/camera.dart';
 import 'package:neuro_care_hub_app/utils/extensions/size_extension.dart';
 import 'package:neuro_care_hub_app/utils/styles/text_styles.dart';
 import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_button.dart';
@@ -78,7 +79,9 @@ class HomePage extends GetView<HomeController> {
                         height: 3.0.hp,
                       ),
                       CircleNavigator(
-                        onTap: () => Get.to(() => BrainTumorDetectionPage()),
+                        // onTap: () => Get.to(() => BrainTumorDetectionPage()),
+                        onTap: () => Get.to(() => const CameraPredection()),
+
                         imageAssetPath: 'assets/images/medical.png',
                         text: "BTD Test",
                       ),

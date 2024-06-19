@@ -9,10 +9,9 @@ import 'package:neuro_care_hub_app/utils/widgets/reusable%20widgets/reusable_but
 class ImageUploadPage extends GetView<TumorController> {
   ImageUploadPage({super.key});
 
-  final TumorController getxcontroller =
-      Get.put<TumorController>(TumorController());
-  final BrainTumorImageDetector imagecontroller =
-      Get.put<BrainTumorImageDetector>(BrainTumorImageDetector());
+
+  // final BrainTumorImageDetector imagecontroller =
+  //     Get.put<BrainTumorImageDetector>(BrainTumorImageDetector());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +29,7 @@ class ImageUploadPage extends GetView<TumorController> {
                 alignment: Alignment.center,
                 child: GestureDetector(
                   onTap: () {
-                    getxcontroller.getImage(ImageSource.gallery);
+                    controller.getImage(ImageSource.gallery);
                   },
                   child: Container(
                     width: 200,
@@ -42,23 +41,23 @@ class ImageUploadPage extends GetView<TumorController> {
                       ),
                       shape: BoxShape.rectangle,
                       color: Colors.grey,
-                      image: getxcontroller.selectedImage == null
-                          ? getxcontroller.myuser.value.image != null &&
-                                  getxcontroller.myuser.value.image!.isNotEmpty
+                      image: controller.selectedImage == null
+                          ? controller.myuser.value.image != null &&
+                                  controller.myuser.value.image!.isNotEmpty
                               ? DecorationImage(
                                   fit: BoxFit.cover,
                                   image: NetworkImage(
-                                      getxcontroller.myuser.value.image!),
+                                      controller.myuser.value.image!),
                                 )
                               : null
                           : DecorationImage(
                               fit: BoxFit.cover,
-                              image: FileImage(getxcontroller.selectedImage!),
+                              image: FileImage(controller.selectedImage!),
                             ),
                     ),
-                    child: getxcontroller.selectedImage == null
-                        ? getxcontroller.myuser.value.image != null &&
-                                getxcontroller.myuser.value.image!.isNotEmpty
+                    child: controller.selectedImage == null
+                        ? controller.myuser.value.image != null &&
+                                controller.myuser.value.image!.isNotEmpty
                             ? Container()
                             : const Center(
                                 child: Icon(
@@ -77,48 +76,48 @@ class ImageUploadPage extends GetView<TumorController> {
             height: 2.0.hp,
           ),
           // Predict button for brain tumor
-          ReusableButton(
-            onTap: () async {
-              if (getxcontroller.selectedImage != null) {
-                getxcontroller.isProfileLoading(true);
-                Map<String, dynamic> result = await imagecontroller
-                    .predict(getxcontroller.selectedImage!.path);
+          // ReusableButton(
+          //   onTap: () async {
+          //     if (controller.selectedImage != null) {
+          //       controller.isProfileLoading(true);
+          //       // Map<String, dynamic> result = await imagecontroller
+          //       //     .predict(controller.selectedImage!.path);
 
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text('Brain Tumor Prediction'),
-                    content: Text(result as String),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  ),
-                );
+          //       showDialog(
+          //         context: context,
+          //         builder: (context) => AlertDialog(
+          //           title: const Text('Brain Tumor Prediction'),
+          //           content: Text(result as String),
+          //           actions: [
+          //             TextButton(
+          //               onPressed: () => Navigator.of(context).pop(),
+          //               child: const Text('OK'),
+          //             ),
+          //           ],
+          //         ),
+          //       );
 
-                getxcontroller.isProfileLoading(false);
-              } else {
-                // Handle case where no image is selected
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text('No Image Selected'),
-                    content: const Text('Please select an image first.'),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  ),
-                );
-              }
-            },
-            text: 'predict',
-            // ... other button properties
-          ),
+          //       controller.isProfileLoading(false);
+          //     } else {
+          //       // Handle case where no image is selected
+          //       showDialog(
+          //         context: context,
+          //         builder: (context) => AlertDialog(
+          //           title: const Text('No Image Selected'),
+          //           content: const Text('Please select an image first.'),
+          //           actions: [
+          //             TextButton(
+          //               onPressed: () => Navigator.of(context).pop(),
+          //               child: const Text('OK'),
+          //             ),
+          //           ],
+          //         ),
+          //       );
+          //     }
+          //   },
+          //   text: 'predict',
+        
+          // ),
         ],
       ),
     );
